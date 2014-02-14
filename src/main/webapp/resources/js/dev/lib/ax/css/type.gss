@@ -1,0 +1,278 @@
+/* Typography.less
+* Headings, body text, lists, code, and more for a versatile and durable typography system
+* ----------------------------------------------------------------------------------------
+*/
+
+/* Grays
+// -------------------------
+*/
+@def BLACK			#000;
+@def GRAY_DARKER	#222;
+@def GRAY_DARK		#333;
+@def GRAY			#555;
+@def GRAY_LIGHT		#999;
+@def GRAY_LIGHTER	#eee;
+@def WHITE			#fff;
+
+@def SANS_FONT_FAMILY       "Helvetica Neue", Helvetica, Arial, sans-serif; 
+@def BASE_LINE_HEIGHT	20px; 
+@def BASE_FONT_SIZE	 14px;
+@def BASE_FONT_FAMILY SANS_FONT_FAMILY; 
+@def HEADINGS_FONT_FAMILY	inherit; 
+@def HEADINGS_FONT_WEIGHT	inherit;
+@def HEADINGS_COLOR 		inherit;
+@def HR_BORDER		GRAY_LIGHTER;
+
+/* Text overflow
+// -------------------------
+// Requires inline-block or block for proper styling
+*/
+@defmixin text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+  
+/* BODY TEXT
+* ---------
+*/
+
+
+p {
+  margin: 0 0 mult(BASE_LINE_HEIGHT,2);
+
+}
+p .small {
+    font-size: BASE_FONT_SIZE-2;
+    color: GRAY_LIGHT;
+  }
+
+.lead {
+  margin-bottom: BASE_LINE_HEIGHT;
+  font-size: 20px;
+  font-weight: 200;
+  line-height: mult(BASE_LINE_HEIGHT,1.5);
+}
+
+/* HEADINGS
+// --------
+*/
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: HEADINGS_FONT_FAMILY;
+  font-weight: HEADINGS_FONT_WEIGHT;
+  color: HEADINGS_COLOR;
+  text-rendering: optimizelegibility; /* Fix the character spacing for headings*/
+  
+}
+
+h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small {
+    font-weight: normal;
+    color: GRAY_LIGHT;
+}
+  
+h1 {
+  font-size: 30px;
+  line-height: mult(BASE_LINE_HEIGHT,2);  
+}
+
+h1 .small { 
+    font-size: 18px;
+  }
+  
+
+h2 {
+  font-size: 24px;
+  line-height: mult(BASE_LINE_HEIGHT,2);
+  
+}
+h2 .small { 
+    font-size: 18px;
+  }
+  
+h3 {
+  font-size: 18px;
+  line-height: mult(BASE_LINE_HEIGHT, 1.5);
+  
+}
+h3 .small { 
+    font-size: 14px;
+  }
+
+
+h4, h5, h6 {
+  line-height: BASE_LINE_HEIGHT;
+} 
+
+h4 {
+  font-size: 14px;
+ 
+}
+h4 .small{ 
+    font-size: 12px;
+}
+
+h5 {
+  font-size: 12px;
+}
+
+
+h6 {
+  font-size: 11px;
+  color: GRAY_LIGHT;
+  text-transform: uppercase;
+}
+
+/* Page header
+*/
+.page-header {
+  padding-bottom: BASE_LINE_HEIGHT-1;
+  margin: BASE_LINE_HEIGHT 0;
+  border-bottom: 1px solid GRAY_LIGHTER;
+}
+.page-header h1 {
+  line-height: 1;
+}
+
+
+
+/* LISTS
+// -----
+*/
+
+/* Unordered and Ordered lists
+*/
+ul, ol {
+  padding: 0;
+  margin: 0 0 divide(BASE_LINE_HEIGHT,2) 25px;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin-bottom: 0;
+}
+ul {
+  list-style: disc;
+}
+ol {
+  list-style: decimal;
+}
+li {
+  line-height: BASE_LINE_HEIGHT;
+}
+ul.unstyled,
+ol.unstyled {
+  margin-left: 0;
+  list-style: none;
+}
+
+/* Description Lists
+*/
+
+dl {
+  margin-bottom: BASE_LINE_HEIGHT;
+}
+dt,
+dd {
+  line-height: BASE_LINE_HEIGHT;
+}
+dt {
+  font-weight: bold;
+  line-height: sub(BASE_LINE_HEIGHT,1px); /* fix jank Helvetica Neue font bug*/
+}
+dd {
+  margin-left: divide(BASE_LINE_HEIGHT,2);
+}
+.dl-horizontal{
+ }
+
+ dl-horizontal  .dt {
+    float: left;
+    width: 120px;
+    clear: left;
+    text-align: right;
+    @mixin text-overflow();
+  }
+  
+dl-horizontal .dd {
+    margin-left: 130px;
+  }
+/*MISC
+// ----
+*/
+/* Horizontal rules
+*/
+hr {
+  margin: BASE_LINE_HEIGHT 0;
+  border: 0;
+  border-top: 1px solid HR_BORDER;
+  border-bottom: 1px solid WHITE;
+}
+
+/* Emphasis
+*/
+strong {
+  font-weight: bold;
+}
+em {
+  font-style: italic;
+}
+.muted {
+  color: GRAY_LIGHT;
+}
+
+/* Abbreviations and acronyms
+*/
+abbr {
+  cursor: help;
+  border-bottom: 1px dotted GRAY_LIGHT;
+}
+abbr .initialism {
+  font-size: 90%;
+  text-transform: uppercase;
+}
+
+/* Blockquotes
+*/
+blockquote {
+  padding: 0 0 0 15px;
+  margin: 0 0 BASE_LINE_HEIGHT;
+  border-left: 5px solid GRAY_LIGHTER;
+}
+blockquote  .p {
+    margin-bottom: 0;
+  
+  }
+blockquote  .small {
+    display: block;
+    line-height: BASE_LINE_HEIGHT;
+    color: GRAY_LIGHT; 
+  }
+
+/* Quotes
+*/
+q:before,
+q:after,
+blockquote:before,
+blockquote:after {
+  content: "";
+}
+
+/* Addresses
+*/
+address {
+  display: block;
+  margin-bottom: BASE_LINE_HEIGHT;
+  font-style: normal;
+  line-height: BASE_LINE_HEIGHT;
+}
+
+/* Misc
+*/
+small {
+  font-size: 100%;
+}
+cite {
+  font-style: normal;
+}

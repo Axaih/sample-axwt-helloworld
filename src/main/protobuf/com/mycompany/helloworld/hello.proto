@@ -1,0 +1,12 @@
+syntax = "proto2";
+
+option java_package = "pbdesc.com.mycompany.helloworld";
+option java_outer_classname = "HomePbDesc";
+import "js/javascript_package.proto";
+option (js.javascript_package) = "pbdesc.com.mycompany.helloworld";
+
+message HelloMsg {
+	optional string text  = 1;
+
+
+}

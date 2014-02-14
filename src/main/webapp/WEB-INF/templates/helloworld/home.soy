@@ -1,0 +1,116 @@
+{namespace soy.mycompany.helloworld.Home}
+/**
+ * 
+ */
+{template .boot}
+{let $cycle:'dev'/}
+
+	{let $resources: ['base':'/resources/',
+	     			'jsLib':'/resources/js/dev/lib/',
+	     			'jsPlugins':'/resources/js/release/plugins/'
+	     		]/}
+	     		
+ <!DOCTYPE html>
+ <html>
+ 
+ <head>
+  <meta charset="utf-8">
+// <script src="/resources/js/ax-il-text.js"></script>
+<link rel="stylesheet" href="{$resources.jsLib}helloworld/css/soy.helloworld.Home.boot.css" media="screen">
+
+{switch  $cycle }
+ {case 'dev'}
+  <script src="{$resources.jsLib}helloworld/css/soy.helloworld.Home.boot.uncompiled.js"></script>
+	    		
+		 	<script src="{$resources.jsLib}closure-library/closure/goog/base.js"></script>
+		 	<script src="{$resources.jsLib}helloworld-deps.js"></script> 
+		 	
+	    	<script>
+	    	goog.require('helloworld.Home'); 
+	    	</script>
+ {/switch}
+ {let $bootstrap}
+window._my={lb}helloworld:{lb}{rb} {rb};
+ 
+  
+  window._my.helloworld.home = new helloworld.Home(document.getElementById('home'),null,window);
+   
+  
+  
+
+{/let}   
+{literal}
+<style>
+.form {
+	padding:10px
+}
+.form button{
+	height:30px;
+	float:right;
+}
+.form-item{
+	margin-top:10px;
+	margin-bottom:10px;
+	
+		width:360px; 
+	
+}
+.form-item label{
+	 
+	display:block;
+}
+.form-item input{
+	 width:100%;
+	 height:21px;
+}
+</style> 
+ {/literal}
+ 
+ </head>
+ <body>
+ <div class="wrap">
+ {call .home data="all" /}
+</div>
+<script>
+ 	{switch  $cycle }
+		{case 'prod'}	
+				/* (function(window){lb} 
+				 {print $ij.embeddedJsResource|noAutoescape} 
+				 	
+				 	{print $bootstrap|noAutoescape}
+				 
+				 {rb})(window)
+				   	 */
+	    {case 'dev_compiled'} 
+					  
+			/* 	 {print $ij.embeddedJsResource|noAutoescape} 
+				  {print $bootstrap|noAutoescape}
+				  
+				 {literal}//# sourceMappingURL={/literal}{$resources.jsLib}source.map */
+	    {case 'dev'} 
+	    			{print $bootstrap|noAutoescape}
+    {/switch}
+			
+ 				 
+
+</script> 
+  
+ </body>
+ </html>
+{/template}
+
+/**
+ * 
+ */
+{template .home}
+
+<div id="{css home}" class="{css home} "> 
+
+<div data-role="response"></div>
+
+<input type="button" value="send" data-role="send-btn">
+
+</div>
+ 
+
+{/template}

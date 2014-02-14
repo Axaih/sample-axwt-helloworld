@@ -1,0 +1,178 @@
+/*@provide ax#gss#scaffolding; */
+
+
+.empty {
+float: left;
+min-height: 1em;
+width: 0px;
+}
+
+.row {
+  margin-left: 0px;
+  *zoom: 1;
+}
+
+.row:before,
+.row:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.row:after {
+  clear: both;
+}
+
+[class*="span"] {
+  float: left;
+  min-height: 1px;
+  margin-left: 0px;
+}
+
+.layout-container {
+   width: 960px; 
+}
+
+ 
+.layout-container:before,
+.layout-container:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.layout-container:after {
+  clear: both;
+}
+
+ 
+
+.span12 {
+  float: left;
+  min-height: 1px;
+  width: 960px;
+}
+
+.span11 {
+  float: left;
+  min-height: 1px;
+  width: 880px;
+}
+
+.span10 {
+  float: left;
+  min-height: 1px;
+  width: 800px;
+}
+
+.span9 {
+  float: left;
+  min-height: 1px;
+  width: 720px;
+}
+
+.span8 {
+  float: left;
+  min-height: 1px;
+  width: 640px;
+}
+
+.span7 {
+  float: left;
+  min-height: 1px;
+  width: 560px;
+}
+
+.span6 {
+  float: left;
+  min-height: 1px;
+  width: 480px;
+}
+
+.span5 {
+  float: left;
+  min-height: 1px;
+  width: 400px;
+}
+
+.span4 {
+  float: left;
+  min-height: 1px;
+  width: 320px;
+}
+
+.span3 {
+  float: left;
+  min-height: 1px;
+  width: 240px;
+}
+
+.span2 {
+  float: left;
+  min-height: 1px;
+  width: 160px;
+}
+
+.span1 {
+  float: left;
+  min-height: 1px;
+  width: 80px;
+}
+.span0 {
+  float: left;
+  min-height: 1px;
+  width: 0px;
+}
+
+
+
+.offset12 {
+  margin-left: 960px;
+}
+
+.offset11 {
+  margin-left: 880px;
+}
+
+.offset10 {
+  margin-left: 800px;
+}
+
+.offset9 {
+  margin-left: 720px;
+}
+
+.offset8 {
+  margin-left: 640px;
+}
+
+.offset7 {
+  margin-left: 560px;
+}
+
+.offset6 {
+  margin-left: 480px;
+}
+
+.offset5 {
+  margin-left: 400px;
+}
+
+.offset4 {
+  margin-left: 320px;
+}
+
+.offset3 {
+  margin-left: 280px;
+}
+
+.offset2 {
+  margin-left: 160px;
+}
+
+.offset1 {
+  margin-left: 80px;
+}
+.offset0 {
+  margin-left: 0px;
+} 

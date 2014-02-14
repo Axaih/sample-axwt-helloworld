@@ -1,0 +1,3833 @@
+
+
+/*@require ax#gss#scaffolding;
+*/
+/*
+// Reset CSS
+// Adapted from http://github.com/necolas/normalize.css
+// --------------------------------------------------
+*/
+
+
+/*Box sizing*/
+@defmixin box-sizing(BOXMODEL) {
+  -webkit-box-sizing: BOXMODEL;
+     -moz-box-sizing: BOXMODEL;
+          box-sizing: BOXMODEL;
+}
+
+
+/* Display in IE6-9 and FF3
+// -------------------------
+*/
+/* Webkit-style focus
+// ------------------
+*/
+@defmixin tab-focus() {
+  /* Default*/
+  outline: thin dotted #333;
+  /* Webkit*/
+ /* @alternate */ outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block;
+}
+
+/* Display block in IE6-9 and FF3
+// -------------------------
+*/
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+ 
+
+/* Base settings
+// -------------------------
+*/
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+}
+/* Focus states*/
+a:focus {
+  @mixin tab-focus();
+}
+/* Hover & Active*/
+a:hover,
+a:active {
+  outline: 0;
+}
+
+/* Prevents sub and sup affecting line-height in all browsers
+// -------------------------
+*/
+sub,
+sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+
+/* Img border in a's and image quality
+// -------------------------
+*/
+
+img {
+  /* Responsive images (ensure images don't scale beyond their parents) */
+  max-width: 100%; /* Part 1: Set a maxium relative to the parent */
+ /* @alternate */ width: auto; /* IE7-8 need help adjusting responsive images */
+  height: auto; /* Part 2: Scale the height according to the width, otherwise you get stretching */
+
+  vertical-align: middle;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+
+/* Prevent max-width from affecting Google Maps
+*/
+#map_canvas img,
+.google-maps img {
+  max-width: none;
+}
+
+/* Forms
+// -------------------------
+*/
+
+/* Font size in all browsers, margin changes, misc consistency
+*/
+button,
+input,
+select,
+textarea {
+  margin: 0;
+  font-size: 100%;
+  vertical-align: middle;
+}
+button,
+input {
+  *overflow: visible; /* Inner spacing ie IE6/7*/
+  line-height: normal; /* FF3/4 have !important on line-height in UA stylesheet*/
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner { /* Inner padding and border oddities in FF3/4*/
+  padding: 0;
+  border: 0;
+}
+button,
+/* Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio` and `video` controls.
+*/
+html input[type="button"], 
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; /* Corrects inability to style clickable `input` types in iOS.*/
+/* Improves usability and consistency of cursor style between image-type `input` and others.
+*/    
+    cursor: pointer; }
+label,
+select,
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+input[type="radio"],
+input[type="checkbox"] {
+/* Improves usability and consistency of cursor style between image-type `input` and others.*/
+
+    cursor: pointer; }
+input[type="search"] { /* Appearance in Safari/Chrome*/
+  @mixin box-sizing(content-box);
+  -webkit-appearance: textfield;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none; /* Inner-padding issues in Chrome OSX, Safari 5*/
+}
+textarea {
+  overflow: auto; /* Remove vertical scrollbar in IE6-9*/
+  vertical-align: top; /*Readability and alignment cross-browser*/
+}
+
+
+/* Printing
+// -------------------------
+// Source: https://github.com/h5bp/html5-boilerplate/blob/master/css/main.css
+*/
+
+@media print {
+
+  * {
+    text-shadow: none !important;
+    color: #000 !important; /* Black prints faster: h5bp.com/s*/
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  /* Don't show links for images, or javascript/internal links*/
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group; /* h5bp.com/t*/
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  @page {
+    margin: 0.5cm;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
+
+/* Typography.less
+* Headings, body text, lists, code, and more for a versatile and durable typography system
+* ----------------------------------------------------------------------------------------
+*/
+
+/* Grays
+// -------------------------
+*/
+@def BLACK			#000;
+@def GRAY_DARKER	#222;
+@def GRAY_DARK		#333;
+@def GRAY			#555;
+@def GRAY_LIGHT		#999;
+@def GRAY_LIGHTER	#eee;
+@def WHITE			#fff;
+
+@def SANS_FONT_FAMILY       "Helvetica Neue", Helvetica, Arial, sans-serif; 
+@def BASE_LINE_HEIGHT	20px; 
+@def BASE_FONT_SIZE	 14px;
+@def BASE_FONT_FAMILY SANS_FONT_FAMILY; 
+@def HEADINGS_FONT_FAMILY	inherit; 
+@def HEADINGS_FONT_WEIGHT	inherit;
+@def HEADINGS_COLOR 		inherit;
+@def HR_BORDER		GRAY_LIGHTER;
+
+/* Text overflow
+// -------------------------
+// Requires inline-block or block for proper styling
+*/
+@defmixin text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+  
+/* BODY TEXT
+* ---------
+*/
+
+
+p {
+  margin: 0 0 mult(BASE_LINE_HEIGHT,2);
+
+}
+p .small {
+    font-size: BASE_FONT_SIZE-2;
+    color: GRAY_LIGHT;
+  }
+
+.lead {
+  margin-bottom: BASE_LINE_HEIGHT;
+  font-size: 20px;
+  font-weight: 200;
+  line-height: mult(BASE_LINE_HEIGHT,1.5);
+}
+
+/* HEADINGS
+// --------
+*/
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: HEADINGS_FONT_FAMILY;
+  font-weight: HEADINGS_FONT_WEIGHT;
+  color: HEADINGS_COLOR;
+  text-rendering: optimizelegibility; /* Fix the character spacing for headings*/
+  
+}
+
+h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small {
+    font-weight: normal;
+    color: GRAY_LIGHT;
+}
+  
+h1 {
+  font-size: 30px;
+  line-height: mult(BASE_LINE_HEIGHT,2);  
+}
+
+h1 .small { 
+    font-size: 18px;
+  }
+  
+
+h2 {
+  font-size: 24px;
+  line-height: mult(BASE_LINE_HEIGHT,2);
+  
+}
+h2 .small { 
+    font-size: 18px;
+  }
+  
+h3 {
+  font-size: 18px;
+  line-height: mult(BASE_LINE_HEIGHT, 1.5);
+  
+}
+h3 .small { 
+    font-size: 14px;
+  }
+
+
+h4, h5, h6 {
+  line-height: BASE_LINE_HEIGHT;
+} 
+
+h4 {
+  font-size: 14px;
+ 
+}
+h4 .small{ 
+    font-size: 12px;
+}
+
+h5 {
+  font-size: 12px;
+}
+
+
+h6 {
+  font-size: 11px;
+  color: GRAY_LIGHT;
+  text-transform: uppercase;
+}
+
+/* Page header
+*/
+.page-header {
+  padding-bottom: BASE_LINE_HEIGHT-1;
+  margin: BASE_LINE_HEIGHT 0;
+  border-bottom: 1px solid GRAY_LIGHTER;
+}
+.page-header h1 {
+  line-height: 1;
+}
+
+
+
+/* LISTS
+// -----
+*/
+
+/* Unordered and Ordered lists
+*/
+ul, ol {
+  padding: 0;
+  margin: 0 0 divide(BASE_LINE_HEIGHT,2) 25px;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin-bottom: 0;
+}
+ul {
+  list-style: disc;
+}
+ol {
+  list-style: decimal;
+}
+li {
+  line-height: BASE_LINE_HEIGHT;
+}
+ul.unstyled,
+ol.unstyled {
+  margin-left: 0;
+  list-style: none;
+}
+
+/* Description Lists
+*/
+
+dl {
+  margin-bottom: BASE_LINE_HEIGHT;
+}
+dt,
+dd {
+  line-height: BASE_LINE_HEIGHT;
+}
+dt {
+  font-weight: bold;
+  line-height: sub(BASE_LINE_HEIGHT,1px); /* fix jank Helvetica Neue font bug*/
+}
+dd {
+  margin-left: divide(BASE_LINE_HEIGHT,2);
+}
+.dl-horizontal{
+ }
+
+ dl-horizontal  .dt {
+    float: left;
+    width: 120px;
+    clear: left;
+    text-align: right;
+    @mixin text-overflow();
+  }
+  
+dl-horizontal .dd {
+    margin-left: 130px;
+  }
+/*MISC
+// ----
+*/
+/* Horizontal rules
+*/
+hr {
+  margin: BASE_LINE_HEIGHT 0;
+  border: 0;
+  border-top: 1px solid HR_BORDER;
+  border-bottom: 1px solid WHITE;
+}
+
+/* Emphasis
+*/
+strong {
+  font-weight: bold;
+}
+em {
+  font-style: italic;
+}
+.muted {
+  color: GRAY_LIGHT;
+}
+
+/* Abbreviations and acronyms
+*/
+abbr {
+  cursor: help;
+  border-bottom: 1px dotted GRAY_LIGHT;
+}
+abbr .initialism {
+  font-size: 90%;
+  text-transform: uppercase;
+}
+
+/* Blockquotes
+*/
+blockquote {
+  padding: 0 0 0 15px;
+  margin: 0 0 BASE_LINE_HEIGHT;
+  border-left: 5px solid GRAY_LIGHTER;
+}
+blockquote  .p {
+    margin-bottom: 0;
+  
+  }
+blockquote  .small {
+    display: block;
+    line-height: BASE_LINE_HEIGHT;
+    color: GRAY_LIGHT; 
+  }
+
+/* Quotes
+*/
+q:before,
+q:after,
+blockquote:before,
+blockquote:after {
+  content: "";
+}
+
+/* Addresses
+*/
+address {
+  display: block;
+  margin-bottom: BASE_LINE_HEIGHT;
+  font-style: normal;
+  line-height: BASE_LINE_HEIGHT;
+}
+
+/* Misc
+*/
+small {
+  font-size: 100%;
+}
+cite {
+  font-style: normal;
+}
+
+
+html,
+body {
+  min-height: 100%;
+  top: 0px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+  background-color: #ffffff;
+}
+#wrap {
+  top: 0px;
+  min-height: 600px;
+}
+#main {
+  overflow: visible;
+  position: absolute;
+  size: auto;
+  width: 100%;
+  min-height: 100%;
+  height: 100%;
+}
+.bottomRightCorner {
+  vertical-align: bottom;
+  text-align: right;
+  width: 100%;
+}
+.rightLinks {
+  width: 100%;
+  float: right;
+}
+
+/*@provide ax#gss#scaffolding; */
+
+
+.empty {
+float: left;
+min-height: 1em;
+width: 0px;
+}
+
+.row {
+  margin-left: 0px;
+  *zoom: 1;
+}
+
+.row:before,
+.row:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.row:after {
+  clear: both;
+}
+
+[class*="span"] {
+  float: left;
+  min-height: 1px;
+  margin-left: 0px;
+}
+
+.layout-container {
+   width: 960px; 
+}
+
+ 
+.layout-container:before,
+.layout-container:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.layout-container:after {
+  clear: both;
+}
+
+ 
+
+.span12 {
+  float: left;
+  min-height: 1px;
+  width: 960px;
+}
+
+.span11 {
+  float: left;
+  min-height: 1px;
+  width: 880px;
+}
+
+.span10 {
+  float: left;
+  min-height: 1px;
+  width: 800px;
+}
+
+.span9 {
+  float: left;
+  min-height: 1px;
+  width: 720px;
+}
+
+.span8 {
+  float: left;
+  min-height: 1px;
+  width: 640px;
+}
+
+.span7 {
+  float: left;
+  min-height: 1px;
+  width: 560px;
+}
+
+.span6 {
+  float: left;
+  min-height: 1px;
+  width: 480px;
+}
+
+.span5 {
+  float: left;
+  min-height: 1px;
+  width: 400px;
+}
+
+.span4 {
+  float: left;
+  min-height: 1px;
+  width: 320px;
+}
+
+.span3 {
+  float: left;
+  min-height: 1px;
+  width: 240px;
+}
+
+.span2 {
+  float: left;
+  min-height: 1px;
+  width: 160px;
+}
+
+.span1 {
+  float: left;
+  min-height: 1px;
+  width: 80px;
+}
+.span0 {
+  float: left;
+  min-height: 1px;
+  width: 0px;
+}
+
+
+
+.offset12 {
+  margin-left: 960px;
+}
+
+.offset11 {
+  margin-left: 880px;
+}
+
+.offset10 {
+  margin-left: 800px;
+}
+
+.offset9 {
+  margin-left: 720px;
+}
+
+.offset8 {
+  margin-left: 640px;
+}
+
+.offset7 {
+  margin-left: 560px;
+}
+
+.offset6 {
+  margin-left: 480px;
+}
+
+.offset5 {
+  margin-left: 400px;
+}
+
+.offset4 {
+  margin-left: 320px;
+}
+
+.offset3 {
+  margin-left: 280px;
+}
+
+.offset2 {
+  margin-left: 160px;
+}
+
+.offset1 {
+  margin-left: 80px;
+}
+.offset0 {
+  margin-left: 0px;
+} 
+
+/*
+ * Copyright 2012 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * styling for goog.ui.menuBar and child buttons.
+ *
+ * @author tvykruta@google.com (Tomas Vykruta)
+ */
+
+
+.goog-menubar {
+  cursor: default;
+  outline: none;
+  position: relative;
+  white-space: nowrap;
+  background: #fff;
+}
+
+.goog-menubar .goog-menu-button {
+  padding: 1px 1px;
+  margin: 0px 0px;
+  outline: none;
+  border: none;
+  background: #fff;
+  /* @alternate */ border: 1px solid #fff;
+}
+
+.goog-menubar .goog-menu-button-dropdown {
+  display: none;
+}
+
+.goog-menubar .goog-menu-button-outer-box {
+  border: none;
+}
+
+.goog-menubar .goog-menu-button-inner-box {
+  border: none;
+}
+
+.goog-menubar .goog-menu-button-hover {
+  background: #eee;
+  border: 1px solid #eee;
+}
+
+.goog-menubar .goog-menu-button-open {
+  background: #fff;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+.goog-menubar .goog-menu-button-disabled {
+  color: #ccc;
+}
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Standard styling for buttons created by goog.ui.MenuButtonRenderer.
+ *
+ * @author attila@google.com (Attila Bodis)
+ */
+
+
+/* State: resting. */
+.goog-menu-button {
+  /* Client apps may override the URL at which they serve the image. */
+  background: #ddd none repeat-x top left;
+  border: 0;
+  color: #000;
+  cursor: pointer;
+  list-style: none;
+  margin: 2px;
+  outline: none;
+  padding: 0;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+/* Pseudo-rounded corners. */
+.goog-menu-button-outer-box,
+.goog-menu-button-inner-box {
+  border-style: solid;
+  border-color: #aaa;
+  vertical-align: top;
+}
+.goog-menu-button-outer-box {
+  margin: 0;
+  border-width: 1px 0;
+  padding: 0;
+}
+.goog-menu-button-inner-box {
+  margin: 0 -1px;
+  border-width: 0 1px;
+  padding: 3px 4px;
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-menu-button-inner-box {
+  /* IE6 needs to have the box shifted to make the borders line up. */
+  left: -1px;
+}
+
+/* Pre-IE7 BiDi fixes. */
+* html .goog-menu-button-rtl .goog-menu-button-outer-box {
+  /* @noflip */ left: -1px;
+  /* @noflip */ right: auto;
+}
+* html .goog-menu-button-rtl .goog-menu-button-inner-box {
+  /* @noflip */ right: auto;
+}
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-menu-button-inner-box {
+  /* IE7 needs to have the box shifted to make the borders line up. */
+  left: -1px;
+}
+/* IE7 BiDi fix. */
+*:first-child+html .goog-menu-button-rtl .goog-menu-button-inner-box {
+  /* @noflip */ left: 1px;
+  /* @noflip */ right: auto;
+}
+
+/* Safari-only hacks. */
+::root .goog-menu-button,
+::root .goog-menu-button-outer-box,
+::root .goog-menu-button-inner-box {
+  /* Required to make pseudo-rounded corners work on Safari. */
+  line-height: 0;
+}
+::root .goog-menu-button-caption,
+::root .goog-menu-button-dropdown {
+  /* Required to make pseudo-rounded corners work on Safari. */
+  line-height: normal;
+}
+
+/* State: disabled. */
+.goog-menu-button-disabled {
+  background-image: none !important;
+  opacity: 0.3;
+  -moz-opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+.goog-menu-button-disabled .goog-menu-button-outer-box,
+.goog-menu-button-disabled .goog-menu-button-inner-box,
+.goog-menu-button-disabled .goog-menu-button-caption,
+.goog-menu-button-disabled .goog-menu-button-dropdown {
+  color: #333 !important;
+  border-color: #999 !important;
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-menu-button-disabled {
+  margin: 2px 1px !important;
+  padding: 0 1px !important;
+}
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-menu-button-disabled {
+  margin: 2px 1px !important;
+  padding: 0 1px !important;
+}
+
+/* State: hover. */
+.goog-menu-button-hover .goog-menu-button-outer-box,
+.goog-menu-button-hover .goog-menu-button-inner-box {
+  border-color: #9cf #69e #69e #7af !important; /* Hover border wins. */
+}
+
+/* State: active, open. */
+.goog-menu-button-active,
+.goog-menu-button-open {
+  background-color: #bbb;
+  background-position: bottom left;
+}
+
+/* State: focused. */
+.goog-menu-button-focused .goog-menu-button-outer-box,
+.goog-menu-button-focused .goog-menu-button-inner-box {
+  border-color: orange;
+}
+
+/* Caption style. */
+.goog-menu-button-caption {
+  padding: 0 4px 0 0;
+  vertical-align: top;
+}
+
+/* Dropdown arrow style. */
+.goog-menu-button-dropdown {
+  height: 15px;
+  width: 7px;
+  /* Client apps may override the URL at which they serve the sprite. */
+  background: none no-repeat -388px 0;
+  vertical-align: top;
+}
+
+/* Pill (collapsed border) styles. */
+/* TODO(gboyer): Remove specific menu button styles and have any button support being a menu button. */
+.goog-menu-button-collapse-right,
+.goog-menu-button-collapse-right .goog-menu-button-outer-box,
+.goog-menu-button-collapse-right .goog-menu-button-inner-box {
+  margin-right: 0;
+}
+
+.goog-menu-button-collapse-left,
+.goog-menu-button-collapse-left .goog-menu-button-outer-box,
+.goog-menu-button-collapse-left .goog-menu-button-inner-box {
+  margin-left: 0;
+}
+
+.goog-menu-button-collapse-left .goog-menu-button-inner-box  {
+  border-left: 1px solid #fff;
+}
+
+.goog-menu-button-collapse-left.goog-menu-button-checked
+.goog-menu-button-inner-box {
+  border-left: 1px solid #ddd;
+}
+
+
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Standard styling for toolbars and toolbar items.
+ *
+ * @author attila@google.com (Attila Bodis)
+ */
+
+
+/*
+ * Styles used by goog.ui.ToolbarRenderer.
+ */
+
+.goog-toolbar {
+  /* Client apps may override the URL at which they serve the image. */ 
+  background: #f6f8f9; /* Old browsers */
+
+/* @alternate */background: rgb(255,255,255); /* Old browsers */
+/* @alternate */background: rgb(255,255,255); /* Old browsers */
+/* @alternate */background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(220,224,242,1) 100%); /* FF3.6+ */
+/* @alternate */background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(220,224,242,1))); /* Chrome,Safari4+ */
+/* @alternate */background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(220,224,242,1) 100%); /* Chrome10+,Safari5.1+ */
+/* @alternate */background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(220,224,242,1) 100%); /* Opera 11.10+ */
+/* @alternate */background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(220,224,242,1) 100%); /* IE10+ */
+/* @alternate */background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(220,224,242,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#dce0f2',GradientType=0 ); /* IE6-9 */
+ 
+ border-bottom: 1px solid #d5d5d5;
+  cursor: default;
+  font: normal 12px Arial, sans-serif;
+  margin: 0;
+  outline: none;
+  padding: 2px;
+  position: relative;
+  zoom: 1; /* The toolbar element must have layout on IE. */
+}
+
+/*
+ * Styles used by goog.ui.ToolbarButtonRenderer.
+ */
+
+.goog-toolbar-button {
+  margin: 0 2px;
+  border: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  color: #333;
+  text-decoration: none;
+  list-style: none;
+  vertical-align: middle;
+  cursor: default;
+  outline: none;
+}
+
+/* Pseudo-rounded corners. */
+.goog-toolbar-button-outer-box,
+.goog-toolbar-button-inner-box {
+  border: 0;
+  vertical-align: top;
+}
+
+.goog-toolbar-button-outer-box {
+  margin: 0;
+  padding: 1px 0;
+}
+
+.goog-toolbar-button-inner-box {
+  margin: 0 -1px;
+  padding: 3px 4px;
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-toolbar-button-inner-box {
+  /* IE6 needs to have the box shifted to make the borders line up. */
+  left: -1px;
+}
+
+/* Pre-IE7 BiDi fixes. */
+* html .goog-toolbar-button-rtl .goog-toolbar-button-outer-box {
+  /* @noflip */ left: -1px;
+}
+* html .goog-toolbar-button-rtl .goog-toolbar-button-inner-box {
+  /* @noflip */ right: auto;
+}
+
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-toolbar-button-inner-box {
+  /* IE7 needs to have the box shifted to make the borders line up. */
+  left: -1px;
+}
+
+/* IE7 BiDi fix. */
+*:first-child+html .goog-toolbar-button-rtl .goog-toolbar-button-inner-box {
+  /* @noflip */ left: 1px;
+  /* @noflip */ right: auto;
+}
+
+/* Safari-only hacks. */
+::root .goog-toolbar-button,
+::root .goog-toolbar-button-outer-box {
+  /* Required to make pseudo-rounded corners work on Safari. */
+  line-height: 0;
+}
+
+::root .goog-toolbar-button-inner-box {
+  /* Required to make pseudo-rounded corners work on Safari. */
+  line-height: normal;
+}
+
+/* Disabled styles. */
+.goog-toolbar-button-disabled {
+  opacity: 0.3;
+  -moz-opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+
+.goog-toolbar-button-disabled .goog-toolbar-button-outer-box,
+.goog-toolbar-button-disabled .goog-toolbar-button-inner-box {
+  /* Disabled text/border color trumps everything else. */
+  color: #333 !important;
+  border-color: #999 !important;
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-toolbar-button-disabled {
+  /* IE can't apply alpha to an element with a transparent background... */
+  background-color: #f0f0f0;
+  margin: 0 1px;
+  padding: 0 1px;
+}
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-toolbar-button-disabled {
+  /* IE can't apply alpha to an element with a transparent background... */
+  background-color: #f0f0f0;
+  margin: 0 1px;
+  padding: 0 1px;
+}
+
+/* Only draw borders when in a non-default state. */
+.goog-toolbar-button-hover .goog-toolbar-button-outer-box,
+.goog-toolbar-button-active .goog-toolbar-button-outer-box,
+.goog-toolbar-button-checked .goog-toolbar-button-outer-box,
+.goog-toolbar-button-selected .goog-toolbar-button-outer-box {
+  border-width: 1px 0;
+  border-style: solid;
+  padding: 0;
+}
+
+.goog-toolbar-button-hover .goog-toolbar-button-inner-box,
+.goog-toolbar-button-active .goog-toolbar-button-inner-box,
+.goog-toolbar-button-checked .goog-toolbar-button-inner-box,
+.goog-toolbar-button-selected .goog-toolbar-button-inner-box {
+  border-width: 0 1px;
+  border-style: solid;
+  padding: 3px;
+}
+
+/* Hover styles. */
+.goog-toolbar-button-hover .goog-toolbar-button-outer-box,
+.goog-toolbar-button-hover .goog-toolbar-button-inner-box {
+  /* Hover border style wins over active/checked/selected. */
+  border-color: #a1badf !important;
+}
+
+/* Active/checked/selected styles. */
+.goog-toolbar-button-active,
+.goog-toolbar-button-checked,
+.goog-toolbar-button-selected {
+  /* Active/checked/selected background color always wins. */
+  background-color: #dde1eb !important;
+}
+
+.goog-toolbar-button-active .goog-toolbar-button-outer-box,
+.goog-toolbar-button-active .goog-toolbar-button-inner-box,
+.goog-toolbar-button-checked .goog-toolbar-button-outer-box,
+.goog-toolbar-button-checked .goog-toolbar-button-inner-box,
+.goog-toolbar-button-selected .goog-toolbar-button-outer-box,
+.goog-toolbar-button-selected .goog-toolbar-button-inner-box {
+  border-color: #729bd1;
+}
+
+/* Pill (collapsed border) styles. */
+.goog-toolbar-button-collapse-right,
+.goog-toolbar-button-collapse-right .goog-toolbar-button-outer-box,
+.goog-toolbar-button-collapse-right .goog-toolbar-button-inner-box {
+  margin-right: 0;
+}
+
+.goog-toolbar-button-collapse-left,
+.goog-toolbar-button-collapse-left .goog-toolbar-button-outer-box,
+.goog-toolbar-button-collapse-left .goog-toolbar-button-inner-box {
+  margin-left: 0;
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-toolbar-button-collapse-left .goog-toolbar-button-inner-box {
+  left: 0;
+}
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-toolbar-button-collapse-left
+.goog-toolbar-button-inner-box {
+  left: 0;
+}
+
+
+/*
+ * Styles used by goog.ui.ToolbarMenuButtonRenderer.
+ */
+
+.goog-toolbar-menu-button {
+  margin: 0 2px;
+  border: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  color: #333;
+  text-decoration: none;
+  list-style: none;
+  vertical-align: middle;
+  cursor: default;
+  outline: none;
+}
+
+/* Pseudo-rounded corners. */
+.goog-toolbar-menu-button-outer-box,
+.goog-toolbar-menu-button-inner-box {
+  border: 0;
+  vertical-align: top;
+}
+
+.goog-toolbar-menu-button-outer-box {
+  margin: 0;
+  padding: 1px 0;
+}
+
+.goog-toolbar-menu-button-inner-box {
+  margin: 0 -1px;
+  padding: 3px 4px;
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-toolbar-menu-button-inner-box {
+  /* IE6 needs to have the box shifted to make the borders line up. */
+  left: -1px;
+}
+
+/* Pre-IE7 BiDi fixes. */
+* html .goog-toolbar-menu-button-rtl .goog-toolbar-menu-button-outer-box {
+  /* @noflip */ left: -1px;
+}
+* html .goog-toolbar-menu-button-rtl .goog-toolbar-menu-button-inner-box {
+  /* @noflip */ right: auto;
+}
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-toolbar-menu-button-inner-box {
+  /* IE7 needs to have the box shifted to make the borders line up. */
+  left: -1px;
+}
+
+/* IE7 BiDi fix. */
+*:first-child+html .goog-toolbar-menu-button-rtl
+  .goog-toolbar-menu-button-inner-box {
+  /* @noflip */ left: 1px;
+  /* @noflip */ right: auto;
+}
+
+/* Safari-only hacks. */
+::root .goog-toolbar-menu-button,
+::root .goog-toolbar-menu-button-outer-box,
+::root .goog-toolbar-menu-button-inner-box {
+  /* Required to make pseudo-rounded corners work on Safari. */
+  line-height: 0;
+}
+
+::root .goog-toolbar-menu-button-caption,
+::root .goog-toolbar-menu-button-dropdown {
+  /* Required to make pseudo-rounded corners work on Safari. */
+  line-height: normal;
+}
+
+/* Disabled styles. */
+.goog-toolbar-menu-button-disabled {
+  opacity: 0.3;
+  -moz-opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+
+.goog-toolbar-menu-button-disabled .goog-toolbar-menu-button-outer-box,
+.goog-toolbar-menu-button-disabled .goog-toolbar-menu-button-inner-box {
+  /* Disabled text/border color trumps everything else. */
+  color: #333 !important;
+  border-color: #999 !important;
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-toolbar-menu-button-disabled {
+  /* IE can't apply alpha to an element with a transparent background... */
+  background-color: #f0f0f0;
+  margin: 0 1px;
+  padding: 0 1px;
+}
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-toolbar-menu-button-disabled {
+  /* IE can't apply alpha to an element with a transparent background... */
+  background-color: #f0f0f0;
+  margin: 0 1px;
+  padding: 0 1px;
+}
+
+/* Only draw borders when in a non-default state. */
+.goog-toolbar-menu-button-hover .goog-toolbar-menu-button-outer-box,
+.goog-toolbar-menu-button-active .goog-toolbar-menu-button-outer-box,
+.goog-toolbar-menu-button-open .goog-toolbar-menu-button-outer-box {
+  border-width: 1px 0;
+  border-style: solid;
+  padding: 0;
+}
+
+.goog-toolbar-menu-button-hover .goog-toolbar-menu-button-inner-box,
+.goog-toolbar-menu-button-active .goog-toolbar-menu-button-inner-box,
+.goog-toolbar-menu-button-open .goog-toolbar-menu-button-inner-box {
+  border-width: 0 1px;
+  border-style: solid;
+  padding: 3px;
+}
+
+/* Hover styles. */
+.goog-toolbar-menu-button-hover .goog-toolbar-menu-button-outer-box,
+.goog-toolbar-menu-button-hover .goog-toolbar-menu-button-inner-box {
+  /* Hover border color trumps active/open style. */
+  border-color: #a1badf !important;
+}
+
+/* Active/open styles. */
+.goog-toolbar-menu-button-active,
+.goog-toolbar-menu-button-open {
+  /* Active/open background color wins. */
+  background-color: #dde1eb !important;
+}
+
+.goog-toolbar-menu-button-active .goog-toolbar-menu-button-outer-box,
+.goog-toolbar-menu-button-active .goog-toolbar-menu-button-inner-box,
+.goog-toolbar-menu-button-open .goog-toolbar-menu-button-outer-box,
+.goog-toolbar-menu-button-open .goog-toolbar-menu-button-inner-box {
+  border-color: #729bd1;
+}
+
+/* Menu button caption style. */
+.goog-toolbar-menu-button-caption {
+  padding: 0 4px 0 0;
+  vertical-align: middle;
+}
+
+/* Dropdown style. */
+.goog-toolbar-menu-button-dropdown {
+  width: 7px;
+  /* Client apps may override the URL at which they serve the sprite. */
+  background: none no-repeat -388px 0;
+  vertical-align: middle;
+}
+
+
+/*
+ * Styles used by goog.ui.ToolbarSeparatorRenderer.
+ */
+
+.goog-toolbar-separator {
+  margin: 0 2px;
+  border-left: 1px solid #d6d6d6;
+  border-right: 1px solid #f7f7f7;
+  padding: 0;
+  width: 0;
+  text-decoration: none;
+  list-style: none;
+  outline: none;
+  vertical-align: middle;
+  line-height: normal;
+  font-size: 120%;
+  overflow: hidden;
+}
+
+
+/*
+ * Additional styling for toolbar select controls, which always have borders.
+ */
+
+.goog-toolbar-select .goog-toolbar-menu-button-outer-box {
+  border-width: 1px 0;
+  border-style: solid;
+  padding: 0;
+}
+
+.goog-toolbar-select .goog-toolbar-menu-button-inner-box {
+  border-width: 0 1px;
+  border-style: solid;
+  padding: 3px;
+}
+
+.goog-toolbar-select .goog-toolbar-menu-button-outer-box,
+.goog-toolbar-select .goog-toolbar-menu-button-inner-box {
+  border-color: #bfcbdf;
+}
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Standard styling for menus created by goog.ui.MenuItemRenderer.
+ *
+ * @author attila@google.com (Attila Bodis)
+ */
+
+
+/**
+ * State: resting.
+ *
+ * NOTE(mleibman,chrishenry):
+ * The RTL support in Closure is provided via two mechanisms -- "rtl" CSS
+ * classes and BiDi flipping done by the CSS compiler.  Closure supports RTL
+ * with or without the use of the CSS compiler.  In order for them not
+ * to conflict with each other, the "rtl" CSS classes need to have the @noflip
+ * annotation.  The non-rtl counterparts should ideally have them as well, but,
+ * since .goog-menuitem existed without .goog-menuitem-rtl for so long before
+ * being added, there is a risk of people having templates where they are not
+ * rendering the .goog-menuitem-rtl class when in RTL and instead rely solely
+ * on the BiDi flipping by the CSS compiler.  That's why we're not adding the
+ * @noflip to .goog-menuitem.
+ */
+.goog-menuitem {
+  color: #000;
+  font: normal 13px Arial, sans-serif;
+  list-style: none;
+  margin: 0;
+  /* 28px on the left for icon or checkbox; 7em on the right for shortcut. */
+  padding: 4px 7em 4px 28px;
+  white-space: nowrap;
+}
+
+/* BiDi override for the resting state. */
+/* @noflip */
+.goog-menuitem.goog-menuitem-rtl {
+  /* Flip left/right padding for BiDi. */
+  padding-left: 7em;
+  padding-right: 28px;
+}
+
+/* If a menu doesn't have checkable items or items with icons, remove padding. */
+.goog-menu-nocheckbox .goog-menuitem,
+.goog-menu-noicon .goog-menuitem {
+  padding-left: 12px;
+}
+
+/*
+ * If a menu doesn't have items with shortcuts, leave just enough room for
+ * submenu arrows, if they are rendered.
+ */
+.goog-menu-noaccel .goog-menuitem {
+  padding-right: 20px;
+}
+
+.goog-menuitem-content {
+  color: #000;
+  font: normal 13px Arial, sans-serif;
+}
+
+/* State: disabled. */
+.goog-menuitem-disabled .goog-menuitem-accel,
+.goog-menuitem-disabled .goog-menuitem-content {
+  color: #ccc !important;
+}
+.goog-menuitem-disabled .goog-menuitem-icon {
+  opacity: 0.3;
+  -moz-opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+
+/* State: hover. */
+.goog-menuitem-highlight,
+.goog-menuitem-hover {
+  background-color: #d6e9f8;
+  /* Use an explicit top and bottom border so that the selection is visible
+   * in high contrast mode. */
+  border-color: #d6e9f8;
+  border-style: dotted;
+  border-width: 1px 0;
+  padding-bottom: 3px;
+  padding-top: 3px;
+}
+
+/* State: selected/checked. */
+.goog-menuitem-checkbox,
+.goog-menuitem-icon {
+  background-repeat: no-repeat;
+  height: 16px;
+  left: 6px;
+  position: absolute;
+  right: auto;
+  vertical-align: middle;
+  width: 16px;
+}
+
+/* BiDi override for the selected/checked state. */
+/* @noflip */
+.goog-menuitem-rtl .goog-menuitem-checkbox,
+.goog-menuitem-rtl .goog-menuitem-icon {
+  /* Flip left/right positioning. */
+  left: auto;
+  right: 6px;
+}
+
+.goog-option-selected .goog-menuitem-checkbox,
+.goog-option-selected .goog-menuitem-icon {
+  /* Client apps may override the URL at which they serve the sprite. */
+  background: none no-repeat -512px 0;
+}
+
+/* Keyboard shortcut ("accelerator") style. */
+.goog-menuitem-accel {
+  color: #999;
+  /* Keyboard shortcuts are untranslated; always left-to-right. */
+  /* @noflip */ direction: ltr;
+  left: auto;
+  padding: 0 6px;
+  position: absolute;
+  right: 0;
+  text-align: right;
+}
+
+/* BiDi override for shortcut style. */
+/* @noflip */
+.goog-menuitem-rtl .goog-menuitem-accel {
+  /* Flip left/right positioning and text alignment. */
+  left: 0;
+  right: auto;
+  text-align: left;
+}
+
+/* Mnemonic styles. */
+.goog-menuitem-mnemonic-hint {
+  text-decoration: underline;
+}
+
+.goog-menuitem-mnemonic-separator {
+  color: #999;
+  font-size: 12px;
+  padding-left: 4px;
+}
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Styling for custom buttons rendered by goog.ui.CustomButtonRenderer.
+ *
+ * @author attila@google.com (Attila Bodis)
+ */
+
+.goog-custom-button {
+  margin: 2px;
+  border: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  color: #000;
+  /* Client apps may override the URL at which they serve the image. */
+  
+    background: #f6f8f9; /* Old browsers */
+
+/* @alternate */background: rgb(255,255,255); /* Old browsers */
+/* @alternate */background: rgb(255,255,255); /* Old browsers */
+/* @alternate */background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(220,224,242,1) 100%); /* FF3.6+ */
+/* @alternate */background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(220,224,242,1))); /* Chrome,Safari4+ */
+/* @alternate */background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(220,224,242,1) 100%); /* Chrome10+,Safari5.1+ */
+/* @alternate */background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(220,224,242,1) 100%); /* Opera 11.10+ */
+/* @alternate */background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(220,224,242,1) 100%); /* IE10+ */
+/* @alternate */background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(220,224,242,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#dce0f2',GradientType=0 ); /* IE6-9 */
+ 
+  
+  text-decoration: none;
+  list-style: none;
+  vertical-align: middle;
+  cursor: default;
+  outline: none;
+}
+
+/* Pseudo-rounded corners. */
+.goog-custom-button-outer-box,
+.goog-custom-button-inner-box {
+  border-style: solid;
+  border-color: #aaa;
+  vertical-align: top;
+}
+
+.goog-custom-button-outer-box {
+  margin: 0;
+  border-width: 1px 0;
+  padding: 0;
+}
+
+.goog-custom-button-inner-box {
+  /* By default in FF2, block elements inside a moz-inline-box are stacked
+   * horizontally next to each other.  This stops that weird behavior. */
+  -moz-box-orient: vertical;
+  margin: 0 -1px;
+  border-width: 0 1px;
+  padding: 3px 4px;
+  white-space: nowrap; /* Prevents buttons from line breaking on android. */
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-custom-button-inner-box {
+  /* IE6 needs to have the box shifted to make the borders line up. */
+  left: -1px;
+}
+/* Pre-IE7 BiDi fixes. */
+* html .goog-custom-button-rtl .goog-custom-button-outer-box {
+  /* @noflip */ left: -1px;
+}
+* html .goog-custom-button-rtl .goog-custom-button-inner-box {
+  /* @noflip */ right: auto;
+}
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-custom-button-inner-box {
+  /* IE7 needs to have the box shifted to make the borders line up. */
+  left: -1px;
+}
+/* IE7 BiDi fix. */
+*:first-child+html .goog-custom-button-rtl .goog-custom-button-inner-box {
+  /* @noflip */ left: 1px;
+}
+
+/* Safari-only hacks. */
+::root .goog-custom-button,
+::root .goog-custom-button-outer-box {
+  /* Required to make pseudo-rounded corners work on Safari. */
+  line-height: 0;
+}
+
+::root .goog-custom-button-inner-box {
+  /* Required to make pseudo-rounded corners work on Safari. */
+  line-height: normal;
+}
+
+/* State: disabled. */
+.goog-custom-button-disabled {
+  background-image: none !important;
+  opacity: 0.3;
+  -moz-opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+
+.goog-custom-button-disabled .goog-custom-button-outer-box,
+.goog-custom-button-disabled .goog-custom-button-inner-box {
+  color: #333 !important;
+  border-color: #999 !important;
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-custom-button-disabled {
+  margin: 2px 1px !important;
+  padding: 0 1px !important;
+}
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-custom-button-disabled {
+  margin: 2px 1px !important;
+  padding: 0 1px !important;
+}
+
+/* State: hover. */
+.goog-custom-button-hover .goog-custom-button-outer-box,
+.goog-custom-button-hover .goog-custom-button-inner-box {
+  border-color: #9cf #69e #69e #7af !important; /* Hover border wins. */
+}
+
+/* State: active, checked. */
+.goog-custom-button-active,
+.goog-custom-button-checked {
+  background-color: #bbb;
+  background-position: bottom left;
+}
+
+/* State: focused. */
+.goog-custom-button-focused .goog-custom-button-outer-box,
+.goog-custom-button-focused .goog-custom-button-inner-box {
+  border-color: orange;
+}
+
+/* Pill (collapsed border) styles. */
+.goog-custom-button-collapse-right,
+.goog-custom-button-collapse-right .goog-custom-button-outer-box,
+.goog-custom-button-collapse-right .goog-custom-button-inner-box {
+  margin-right: 0;
+}
+
+.goog-custom-button-collapse-left,
+.goog-custom-button-collapse-left .goog-custom-button-outer-box,
+.goog-custom-button-collapse-left .goog-custom-button-inner-box {
+  margin-left: 0;
+}
+
+.goog-custom-button-collapse-left .goog-custom-button-inner-box  {
+  border-left: 1px solid #fff;
+}
+
+.goog-custom-button-collapse-left.goog-custom-button-checked
+.goog-custom-button-inner-box {
+  border-left: 1px solid #ddd;
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-custom-button-collapse-left .goog-custom-button-inner-box {
+  left: 0;
+}
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-custom-button-collapse-left
+.goog-custom-button-inner-box {
+  left: 0;
+}
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Standard styling for goog.ui.Dialog.
+ *
+ * @author ssaviano@google.com (Steven Saviano)
+ * @author attila@google.com (Attila Bodis)
+ */
+
+
+.modal-dialog {
+  background: #c1d9ff;
+  border: 1px solid #3a5774;
+  color: #000;
+  padding: 4px;
+  position: absolute;
+}
+
+.modal-dialog a,
+.modal-dialog a:link,
+.modal-dialog a:visited  {
+  color: #06c;
+  cursor: pointer;
+}
+
+.modal-dialog-bg {
+  background: #666;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.modal-dialog-title {
+  background: #e0edfe;
+  color: #000;
+  cursor: pointer;
+  font-size: 120%;
+  font-weight: bold;
+
+  /* Add padding on the right to ensure the close button has room. */
+  padding: 8px 31px 8px 8px;
+
+  position: relative;
+  _zoom: 1; /* Ensures proper width in IE6 RTL. */
+}
+
+.modal-dialog-title-close {
+  /* Client apps may override the URL at which they serve the sprite. */
+  background: #e0edfe none no-repeat -528px 0;
+  cursor: default;
+  height: 15px;
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  width: 15px;
+  vertical-align: middle;
+}
+
+.modal-dialog-buttons,
+.modal-dialog-content {
+  background-color: #fff;
+  padding: 8px;
+}
+
+.goog-buttonset-default {
+  font-weight: bold;
+}
+
+.ax-magazine{
+	
+}
+.ax-magazine-pages{
+	
+}
+.ax-magazine-page{
+	display:none;
+}
+.ax-magazine-page-selected{
+	display:block;
+}
+/*
+Animate.css - http://daneden.me/animate
+Licensed under the MIT license
+
+Copyright (c) 2013 Daniel Eden
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+body { /* Addresses a small issue in webkit: http://bit.ly/NEdoDq */
+	-webkit-backface-visibility: hidden;
+}
+.animated {
+	-webkit-animation-duration: 1s;
+	   -moz-animation-duration: 1s;
+	     -o-animation-duration: 1s;
+	        animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	   -moz-animation-fill-mode: both;
+	     -o-animation-fill-mode: both;
+	        animation-fill-mode: both;
+}
+
+.animated.hinge {
+	-webkit-animation-duration: 2s;
+	   -moz-animation-duration: 2s;
+	     -o-animation-duration: 2s;
+	        animation-duration: 2s;
+}
+
+
+.animated.lightSpeedIn {
+    -webkit-animation-duration: 0.5s;
+    -moz-animation-duration: 0.5s;
+    -o-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+}
+
+.animated.lightSpeedOut {
+    -webkit-animation-duration: 0.25s;
+    -moz-animation-duration: 0.25s;
+    -o-animation-duration: 0.25s;
+    animation-duration: 0.25s;
+}
+
+
+.animated.wiggle {
+    -webkit-animation-duration: 0.75s;
+    -moz-animation-duration: 0.75s;
+    -o-animation-duration: 0.75s;
+    animation-duration: 0.75s;
+}
+
+/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
+
+@-webkit-keyframes pulse {
+    0% { -webkit-transform: scale(1); }	
+	50% { -webkit-transform: scale(1.1); }
+    100% { -webkit-transform: scale(1); }
+}
+@-moz-keyframes pulse {
+    0% { -moz-transform: scale(1); }	
+	50% { -moz-transform: scale(1.1); }
+    100% { -moz-transform: scale(1); }
+}
+@-o-keyframes pulse {
+    0% { -o-transform: scale(1); }	
+	50% { -o-transform: scale(1.1); }
+    100% { -o-transform: scale(1); }
+}
+@keyframes pulse {
+    0% { transform: scale(1); }	
+	50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.pulse {
+	-webkit-animation-name: pulse;
+	-moz-animation-name: pulse;
+	-o-animation-name: pulse;
+	animation-name: pulse;
+}
+
+/* Wells
+ --------------------------------------------------
+*/
+@def WELL_BACKGROUND                  #f5f5f5;
+@def BASE_BORDER_RADIUS					4px;   
+@def BORDER_RADIUS_LARGE     			6px;
+@def BORDER_RADIUS_SMALL     			3px;
+
+@defmixin  border-radius(RADIUS) {
+  -webkit-border-radius: RADIUS;
+     -moz-border-radius: RADIUS;
+          border-radius: RADIUS;
+}
+
+/* Drop shadows
+*/
+@defmixin  box-shadow(SHADOW) {
+  -webkit-box-shadow: SHADOW;
+     -moz-box-shadow: SHADOW;
+          box-shadow: SHADOW;
+}
+
+
+
+/* Base class
+*/
+.well {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: WELL_BACKGROUND;
+  border: 1px solid darken(WELL_BACKGROUND, 7%);
+  
+  @mixin border-radius(BASE_BORDER_RADIUS);
+  @mixin box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
+  
+
+}
+.well .blockquote {
+    /* @alternate */ border-color: #ddd;
+    border-color: rgba(0,0,0,.15);
+  }
+/* Sizes
+*/
+.well-large {
+  padding: 24px;
+  @mixin border-radius(BORDER_RADIUS_LARGE);
+}
+.well-small {
+  padding: 9px;
+  @mixin border-radius(BORDER_RADIUS_SMALL);
+}
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Cross-browser implementation of the "display: inline-block" CSS property.
+ * See http://www.w3.org/TR/CSS21/visuren.html#propdef-display for details.
+ * Tested on IE 6 & 7, FF 1.5 & 2.0, Safari 2 & 3, Webkit, and Opera 9.
+ *
+ * @author attila@google.com (Attila Bodis)
+ */
+
+/*
+ * Default rule; only Safari, Webkit, and Opera handle it without hacks.
+ */
+.goog-inline-block {
+  position: relative;
+  display: -moz-inline-box; /* Ignored by FF3 and later. */
+  display: inline-block;
+}
+
+/*
+ * Pre-IE7 IE hack.  On IE, "display: inline-block" only gives the element
+ * layout, but doesn't give it inline behavior.  Subsequently setting display
+ * to inline does the trick.
+ */
+* html .goog-inline-block {
+  display: inline;
+}
+
+/*
+ * IE7-only hack.  On IE, "display: inline-block" only gives the element
+ * layout, but doesn't give it inline behavior.  Subsequently setting display
+ * to inline does the trick.
+ */
+*:first-child+html .goog-inline-block {
+  display: inline;
+}
+
+/*
+ * Copyright 2010 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+.goog-bubble-font {
+  font-size: 80%;
+  color: #888888;
+}
+
+.goog-bubble-close-button {
+  background-image:url(//ssl.gstatic.com/closure/bubble_close.jpg);
+  background-color: white;
+  background-position: top right;
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+}
+
+.goog-bubble-left {
+  background-image:url(//ssl.gstatic.com/closure/bubble_left.gif);
+  background-position:left;
+  background-repeat:repeat-y;
+  width: 4px;
+}
+
+.goog-bubble-right {
+  background-image:url(//ssl.gstatic.com/closure/bubble_right.gif);
+  background-position: right;
+  background-repeat: repeat-y;
+  width: 4px;
+}
+
+.goog-bubble-top-right-anchor {
+  background-image:url(//ssl.gstatic.com/closure/right_anchor_bubble_top.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 147px;
+  height: 16px;
+}
+
+.goog-bubble-top-left-anchor {
+  background-image:url(//ssl.gstatic.com/closure/left_anchor_bubble_top.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 147px;
+  height: 16px;
+}
+
+.goog-bubble-top-no-anchor {
+  background-image:url(//ssl.gstatic.com/closure/no_anchor_bubble_top.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 147px;
+  height: 6px;
+}
+
+.goog-bubble-bottom-right-anchor {
+  background-image:url(//ssl.gstatic.com/closure/right_anchor_bubble_bot.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 147px;
+  height: 16px;
+}
+
+.goog-bubble-bottom-left-anchor {
+  background-image:url(//ssl.gstatic.com/closure/left_anchor_bubble_bot.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 147px;
+  height: 16px;
+}
+
+.goog-bubble-bottom-no-anchor {
+  background-image:url(//ssl.gstatic.com/closure/no_anchor_bubble_bot.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 147px;
+  height: 8px;
+}
+
+
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Styling for buttons rendered by goog.ui.ButtonRenderer.
+ *
+ * @author attila@google.com (Attila Bodis)
+ */
+
+.goog-button {
+  color: #036;
+  border-color: #036;
+  background-color: #69c;
+}
+
+/* State: disabled. */
+.goog-button-disabled {
+  border-color: #333;
+  color: #333;
+  background-color: #999;
+}
+
+/* State: hover. */
+.goog-button-hover {
+  color: #369;
+  border-color: #369;
+  background-color: #9cf;
+}
+
+/* State: active. */
+.goog-button-active {
+  color: #69c;
+  border-color: #69c;
+}
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Standard styling for menus created by goog.ui.MenuRenderer.
+ *
+ * @author attila@google.com (Attila Bodis)
+ */
+
+
+.goog-menu {
+  background: #fff;
+  border-color: #ccc #666 #666 #ccc;
+  border-style: solid;
+  border-width: 1px;
+  cursor: default;
+  font: normal 13px Arial, sans-serif;
+  margin: 0;
+  outline: none;
+  padding: 4px 0;
+  position: absolute;
+  z-index: 20000; /* Arbitrary, but some apps depend on it... */
+}
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Standard styling for menus created by goog.ui.MenuSeparatorRenderer.
+ *
+ * @author attila@google.com (Attila Bodis)
+ */
+
+
+.goog-menuseparator {
+  border-top: 1px solid #ccc;
+  margin: 4px 0;
+  padding: 0;
+}
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Styling for flat buttons created by goog.ui.FlatButtonRenderer.
+ *
+ * @author brianp@google.com (Brian Peterson)
+ */
+
+.goog-flat-button {
+  position: relative;
+  /*width: 20ex;*/
+  margin: 2px;
+  border: 1px solid #000;
+  padding: 2px 6px;
+  font: normal 13px "Trebuchet MS", Tahoma, Arial, sans-serif;
+  color: #fff;
+  background-color: #8c2425;
+  cursor: pointer;
+  outline: none;
+}
+
+/* State: disabled. */
+.goog-flat-button-disabled {
+  border-color: #888;
+  color: #888;
+  background-color: #ccc;
+  cursor: default;
+}
+
+/* State: hover. */
+.goog-flat-button-hover {
+  border-color: #8c2425;
+  color: #8c2425;
+  background-color: #eaa4a5;
+}
+
+/* State: active, selected, checked. */
+.goog-flat-button-active,
+.goog-flat-button-selected,
+.goog-flat-button-checked {
+  border-color: #5b4169;
+  color: #5b4169;
+  background-color: #d1a8ea;
+}
+
+/* State: focused. */
+.goog-flat-button-focused {
+  border-color: #5b4169;
+}
+
+/* Pill (collapsed border) styles. */
+.goog-flat-button-collapse-right {
+  margin-right: 0;
+}
+
+.goog-flat-button-collapse-left {
+  margin-left: 0;
+  border-left: none;
+}
+
+/*
+ * Copyright 2010 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Styling for link buttons created by goog.ui.LinkButtonRenderer.
+ *
+ * @author robbyw@google.com (Robby Walker)
+ */
+
+.goog-link-button {
+  position: relative;
+  color: #00f;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* State: disabled. */
+.goog-link-button-disabled {
+  color: #888;
+  text-decoration: none;
+  cursor: default;
+}
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Styles for goog.ui.ac.AutoComplete and its derivatives.
+ * Note: these styles need some work to get them working properly at various
+ * font sizes other than the default.
+ *
+ * @author pupius@google.com (Daniel Pupius)
+ * @author annams@google.com (Srinivas Annam)
+ */
+
+
+/*
+ * TODO(annams): Rename (here and in renderer.js) to specify class name as
+ * goog-autocomplete-renderer
+ */
+.ac-renderer {
+  font: normal 13px Arial, sans-serif;
+  position: absolute;
+  background: #fff;
+  border: 1px solid #666;
+  -moz-box-shadow: 2px 2px 2px rgba(102, 102, 102, .4);
+  -webkit-box-shadow: 2px 2px 2px rgba(102, 102, 102, .4);
+  width: 300px;
+}
+
+.ac-row {
+  cursor: pointer;
+  padding: .4em;
+}
+
+.ac-highlighted {
+  font-weight: bold;
+}
+
+.ac-active {
+  background-color: #b2b4bf;
+}
+
+/*
+ * Copyright 2010 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Styling for link buttons created by goog.ui.LinkButtonRenderer.
+ *
+ * @author robbyw@google.com (Robby Walker)
+ */
+
+.goog-link-button {
+  position: relative;
+  color: #00f;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* State: disabled. */
+.goog-link-button-disabled {
+  color: #888;
+  text-decoration: none;
+  cursor: default;
+}
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Standard styling for menus created by goog.ui.MenuRenderer.
+ *
+ * @author attila@google.com (Attila Bodis)
+ */
+
+
+.goog-menu {
+  background: #fff;
+  border-color: #ccc #666 #666 #ccc;
+  border-style: solid;
+  border-width: 1px;
+  cursor: default;
+  font: normal 13px Arial, sans-serif;
+  margin: 0;
+  outline: none;
+  padding: 4px 0;
+  position: absolute;
+  z-index: 20000; /* Arbitrary, but some apps depend on it... */
+}
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Standard styling for menus created by goog.ui.MenuItemRenderer.
+ *
+ * @author attila@google.com (Attila Bodis)
+ */
+
+
+/**
+ * State: resting.
+ *
+ * NOTE(mleibman,chrishenry):
+ * The RTL support in Closure is provided via two mechanisms -- "rtl" CSS
+ * classes and BiDi flipping done by the CSS compiler.  Closure supports RTL
+ * with or without the use of the CSS compiler.  In order for them not
+ * to conflict with each other, the "rtl" CSS classes need to have the @noflip
+ * annotation.  The non-rtl counterparts should ideally have them as well, but,
+ * since .goog-menuitem existed without .goog-menuitem-rtl for so long before
+ * being added, there is a risk of people having templates where they are not
+ * rendering the .goog-menuitem-rtl class when in RTL and instead rely solely
+ * on the BiDi flipping by the CSS compiler.  That's why we're not adding the
+ * @noflip to .goog-menuitem.
+ */
+.goog-menuitem {
+  color: #000;
+  font: normal 13px Arial, sans-serif;
+  list-style: none;
+  margin: 0;
+  /* 28px on the left for icon or checkbox; 7em on the right for shortcut. */
+  padding: 4px 7em 4px 28px;
+  white-space: nowrap;
+}
+
+/* BiDi override for the resting state. */
+/* @noflip */
+.goog-menuitem.goog-menuitem-rtl {
+  /* Flip left/right padding for BiDi. */
+  padding-left: 7em;
+  padding-right: 28px;
+}
+
+/* If a menu doesn't have checkable items or items with icons, remove padding. */
+.goog-menu-nocheckbox .goog-menuitem,
+.goog-menu-noicon .goog-menuitem {
+  padding-left: 12px;
+}
+
+/*
+ * If a menu doesn't have items with shortcuts, leave just enough room for
+ * submenu arrows, if they are rendered.
+ */
+.goog-menu-noaccel .goog-menuitem {
+  padding-right: 20px;
+}
+
+.goog-menuitem-content {
+  color: #000;
+  font: normal 13px Arial, sans-serif;
+}
+
+/* State: disabled. */
+.goog-menuitem-disabled .goog-menuitem-accel,
+.goog-menuitem-disabled .goog-menuitem-content {
+  color: #ccc !important;
+}
+.goog-menuitem-disabled .goog-menuitem-icon {
+  opacity: 0.3;
+  -moz-opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+
+/* State: hover. */
+.goog-menuitem-highlight,
+.goog-menuitem-hover {
+  background-color: #d6e9f8;
+  /* Use an explicit top and bottom border so that the selection is visible
+   * in high contrast mode. */
+  border-color: #d6e9f8;
+  border-style: dotted;
+  border-width: 1px 0;
+  padding-bottom: 3px;
+  padding-top: 3px;
+}
+
+/* State: selected/checked. */
+.goog-menuitem-checkbox,
+.goog-menuitem-icon {
+  background-repeat: no-repeat;
+  height: 16px;
+  left: 6px;
+  position: absolute;
+  right: auto;
+  vertical-align: middle;
+  width: 16px;
+}
+
+/* BiDi override for the selected/checked state. */
+/* @noflip */
+.goog-menuitem-rtl .goog-menuitem-checkbox,
+.goog-menuitem-rtl .goog-menuitem-icon {
+  /* Flip left/right positioning. */
+  left: auto;
+  right: 6px;
+}
+
+.goog-option-selected .goog-menuitem-checkbox,
+.goog-option-selected .goog-menuitem-icon {
+  /* Client apps may override the URL at which they serve the sprite. */
+  background: url(//ssl.gstatic.com/editor/editortoolbar.png) no-repeat -512px 0;
+}
+
+/* Keyboard shortcut ("accelerator") style. */
+.goog-menuitem-accel {
+  color: #999;
+  /* Keyboard shortcuts are untranslated; always left-to-right. */
+  /* @noflip */ direction: ltr;
+  left: auto;
+  padding: 0 6px;
+  position: absolute;
+  right: 0;
+  text-align: right;
+}
+
+/* BiDi override for shortcut style. */
+/* @noflip */
+.goog-menuitem-rtl .goog-menuitem-accel {
+  /* Flip left/right positioning and text alignment. */
+  left: 0;
+  right: auto;
+  text-align: left;
+}
+
+/* Mnemonic styles. */
+.goog-menuitem-mnemonic-hint {
+  text-decoration: underline;
+}
+
+.goog-menuitem-mnemonic-separator {
+  color: #999;
+  font-size: 12px;
+  padding-left: 4px;
+}
+
+/*
+ * Copyright 2008 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/* Author: attila@google.com (Attila Bodis) */
+/* Author: eae@google.com (Emil A. Eklund) */
+
+
+/*
+ * Styles used by goog.ui.TabRenderer.
+ */
+.goog-tab {
+  position: relative;
+  padding: 4px 8px;
+  color: #00c;
+  text-decoration: underline;
+  cursor: default;
+}
+
+.goog-tab-bar-top .goog-tab {
+  margin: 1px 4px 0 0;
+  border-bottom: 0;
+  float: left;
+}
+
+.goog-tab-bar-top:after,
+.goog-tab-bar-bottom:after {
+  content: " ";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.goog-tab-bar-bottom .goog-tab {
+  margin: 0 4px 1px 0;
+  border-top: 0;
+  float: left;
+}
+
+.goog-tab-bar-start .goog-tab {
+  margin: 0 0 4px 1px;
+  border-right: 0;
+}
+
+.goog-tab-bar-end .goog-tab {
+  margin: 0 1px 4px 0;
+  border-left: 0;
+}
+
+/* State: Hover */
+.goog-tab-hover {
+  background: #eee;
+}
+
+/* State: Disabled */
+.goog-tab-disabled {
+  color: #666;
+}
+
+/* State: Selected */
+.goog-tab-selected {
+  color: #000;
+  background: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border: 1px solid #6b90da;
+}
+
+.goog-tab-bar-top {
+  padding-top: 5px !important;
+  padding-left: 5px !important;
+  border-bottom: 1px solid #6b90da !important;
+}
+/*
+ * Shift selected tabs 1px towards the contents (and compensate via margin and
+ * padding) to visually merge the borders of the tab with the borders of the
+ * content area.
+ */
+.goog-tab-bar-top .goog-tab-selected {
+  top: 1px;
+  margin-top: 0;
+  padding-bottom: 5px;
+}
+
+.goog-tab-bar-bottom .goog-tab-selected {
+  top: -1px;
+  margin-bottom: 0;
+  padding-top: 5px;
+}
+
+.goog-tab-bar-start .goog-tab-selected {
+  left: 1px;
+  margin-left: 0;
+  padding-right: 9px;
+}
+
+.goog-tab-bar-end .goog-tab-selected {
+  left: -1px;
+  margin-right: 0;
+  padding-left: 9px;
+}
+
+/*
+ * Copyright 2008 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/* Author: attila@google.com (Attila Bodis) */
+/* Author: eae@google.com (Emil A. Eklund) */
+
+
+/*
+ * Styles used by goog.ui.TabBarRenderer.
+ */
+.goog-tab-bar {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  list-style: none;
+  cursor: default;
+  outline: none;
+  background: #ebeff9;
+}
+
+.goog-tab-bar-clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+.goog-tab-bar-start {
+  float: left;
+}
+
+.goog-tab-bar-end {
+  float: right;
+}
+
+
+/*
+ * IE6-only hacks to fix the gap between the floated tabs and the content.
+ * IE7 and later will ignore these.
+ */
+/* @if user.agent ie6 */
+* html .goog-tab-bar-start {
+  margin-right: -3px;
+}
+
+* html .goog-tab-bar-end {
+  margin-left: -3px;
+}
+/* @endif */
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Standard styling for toolbars and toolbar items.
+ *
+ * @author attila@google.com (Attila Bodis)
+ */
+
+
+/*
+ * Styles used by goog.ui.ToolbarRenderer.
+ */
+
+.goog-toolbar {
+  /* Client apps may override the URL at which they serve the image. */
+  background: #fafafa url(//ssl.gstatic.com/editor/toolbar-bg.png) repeat-x bottom left;
+  border-bottom: 1px solid #d5d5d5;
+  cursor: default;
+  font: normal 12px Arial, sans-serif;
+  margin: 0;
+  outline: none;
+  padding: 2px;
+  position: relative;
+  zoom: 1; /* The toolbar element must have layout on IE. */
+}
+
+/*
+ * Styles used by goog.ui.ToolbarButtonRenderer.
+ */
+
+.goog-toolbar-button {
+  margin: 0 2px;
+  border: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  color: #333;
+  text-decoration: none;
+  list-style: none;
+  vertical-align: middle;
+  cursor: default;
+  outline: none;
+}
+
+/* Pseudo-rounded corners. */
+.goog-toolbar-button-outer-box,
+.goog-toolbar-button-inner-box {
+  border: 0;
+  vertical-align: top;
+}
+
+.goog-toolbar-button-outer-box {
+  margin: 0;
+  padding: 1px 0;
+}
+
+.goog-toolbar-button-inner-box {
+  margin: 0 -1px;
+  padding: 3px 4px;
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-toolbar-button-inner-box {
+  /* IE6 needs to have the box shifted to make the borders line up. */
+  left: -1px;
+}
+
+/* Pre-IE7 BiDi fixes. */
+* html .goog-toolbar-button-rtl .goog-toolbar-button-outer-box {
+  /* @noflip */ left: -1px;
+}
+* html .goog-toolbar-button-rtl .goog-toolbar-button-inner-box {
+  /* @noflip */ right: auto;
+}
+
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-toolbar-button-inner-box {
+  /* IE7 needs to have the box shifted to make the borders line up. */
+  left: -1px;
+}
+
+/* IE7 BiDi fix. */
+*:first-child+html .goog-toolbar-button-rtl .goog-toolbar-button-inner-box {
+  /* @noflip */ left: 1px;
+  /* @noflip */ right: auto;
+}
+
+/* Safari-only hacks. */
+::root .goog-toolbar-button,
+::root .goog-toolbar-button-outer-box {
+  /* Required to make pseudo-rounded corners work on Safari. */
+  line-height: 0;
+}
+
+::root .goog-toolbar-button-inner-box {
+  /* Required to make pseudo-rounded corners work on Safari. */
+  line-height: normal;
+}
+
+/* Disabled styles. */
+.goog-toolbar-button-disabled {
+  opacity: 0.3;
+  -moz-opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+
+.goog-toolbar-button-disabled .goog-toolbar-button-outer-box,
+.goog-toolbar-button-disabled .goog-toolbar-button-inner-box {
+  /* Disabled text/border color trumps everything else. */
+  color: #333 !important;
+  border-color: #999 !important;
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-toolbar-button-disabled {
+  /* IE can't apply alpha to an element with a transparent background... */
+  background-color: #f0f0f0;
+  margin: 0 1px;
+  padding: 0 1px;
+}
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-toolbar-button-disabled {
+  /* IE can't apply alpha to an element with a transparent background... */
+  background-color: #f0f0f0;
+  margin: 0 1px;
+  padding: 0 1px;
+}
+
+/* Only draw borders when in a non-default state. */
+.goog-toolbar-button-hover .goog-toolbar-button-outer-box,
+.goog-toolbar-button-active .goog-toolbar-button-outer-box,
+.goog-toolbar-button-checked .goog-toolbar-button-outer-box,
+.goog-toolbar-button-selected .goog-toolbar-button-outer-box {
+  border-width: 1px 0;
+  border-style: solid;
+  padding: 0;
+}
+
+.goog-toolbar-button-hover .goog-toolbar-button-inner-box,
+.goog-toolbar-button-active .goog-toolbar-button-inner-box,
+.goog-toolbar-button-checked .goog-toolbar-button-inner-box,
+.goog-toolbar-button-selected .goog-toolbar-button-inner-box {
+  border-width: 0 1px;
+  border-style: solid;
+  padding: 3px;
+}
+
+/* Hover styles. */
+.goog-toolbar-button-hover .goog-toolbar-button-outer-box,
+.goog-toolbar-button-hover .goog-toolbar-button-inner-box {
+  /* Hover border style wins over active/checked/selected. */
+  border-color: #a1badf !important;
+}
+
+/* Active/checked/selected styles. */
+.goog-toolbar-button-active,
+.goog-toolbar-button-checked,
+.goog-toolbar-button-selected {
+  /* Active/checked/selected background color always wins. */
+  background-color: #dde1eb !important;
+}
+
+.goog-toolbar-button-active .goog-toolbar-button-outer-box,
+.goog-toolbar-button-active .goog-toolbar-button-inner-box,
+.goog-toolbar-button-checked .goog-toolbar-button-outer-box,
+.goog-toolbar-button-checked .goog-toolbar-button-inner-box,
+.goog-toolbar-button-selected .goog-toolbar-button-outer-box,
+.goog-toolbar-button-selected .goog-toolbar-button-inner-box {
+  border-color: #729bd1;
+}
+
+/* Pill (collapsed border) styles. */
+.goog-toolbar-button-collapse-right,
+.goog-toolbar-button-collapse-right .goog-toolbar-button-outer-box,
+.goog-toolbar-button-collapse-right .goog-toolbar-button-inner-box {
+  margin-right: 0;
+}
+
+.goog-toolbar-button-collapse-left,
+.goog-toolbar-button-collapse-left .goog-toolbar-button-outer-box,
+.goog-toolbar-button-collapse-left .goog-toolbar-button-inner-box {
+  margin-left: 0;
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-toolbar-button-collapse-left .goog-toolbar-button-inner-box {
+  left: 0;
+}
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-toolbar-button-collapse-left
+.goog-toolbar-button-inner-box {
+  left: 0;
+}
+
+
+/*
+ * Styles used by goog.ui.ToolbarMenuButtonRenderer.
+ */
+
+.goog-toolbar-menu-button {
+  margin: 0 2px;
+  border: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  color: #333;
+  text-decoration: none;
+  list-style: none;
+  vertical-align: middle;
+  cursor: default;
+  outline: none;
+}
+
+/* Pseudo-rounded corners. */
+.goog-toolbar-menu-button-outer-box,
+.goog-toolbar-menu-button-inner-box {
+  border: 0;
+  vertical-align: top;
+}
+
+.goog-toolbar-menu-button-outer-box {
+  margin: 0;
+  padding: 1px 0;
+}
+
+.goog-toolbar-menu-button-inner-box {
+  margin: 0 -1px;
+  padding: 3px 4px;
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-toolbar-menu-button-inner-box {
+  /* IE6 needs to have the box shifted to make the borders line up. */
+  left: -1px;
+}
+
+/* Pre-IE7 BiDi fixes. */
+* html .goog-toolbar-menu-button-rtl .goog-toolbar-menu-button-outer-box {
+  /* @noflip */ left: -1px;
+}
+* html .goog-toolbar-menu-button-rtl .goog-toolbar-menu-button-inner-box {
+  /* @noflip */ right: auto;
+}
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-toolbar-menu-button-inner-box {
+  /* IE7 needs to have the box shifted to make the borders line up. */
+  left: -1px;
+}
+
+/* IE7 BiDi fix. */
+*:first-child+html .goog-toolbar-menu-button-rtl
+  .goog-toolbar-menu-button-inner-box {
+  /* @noflip */ left: 1px;
+  /* @noflip */ right: auto;
+}
+
+/* Safari-only hacks. */
+::root .goog-toolbar-menu-button,
+::root .goog-toolbar-menu-button-outer-box,
+::root .goog-toolbar-menu-button-inner-box {
+  /* Required to make pseudo-rounded corners work on Safari. */
+  line-height: 0;
+}
+
+::root .goog-toolbar-menu-button-caption,
+::root .goog-toolbar-menu-button-dropdown {
+  /* Required to make pseudo-rounded corners work on Safari. */
+  line-height: normal;
+}
+
+/* Disabled styles. */
+.goog-toolbar-menu-button-disabled {
+  opacity: 0.3;
+  -moz-opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+
+.goog-toolbar-menu-button-disabled .goog-toolbar-menu-button-outer-box,
+.goog-toolbar-menu-button-disabled .goog-toolbar-menu-button-inner-box {
+  /* Disabled text/border color trumps everything else. */
+  color: #333 !important;
+  border-color: #999 !important;
+}
+
+/* Pre-IE7 IE hack; ignored by IE7 and all non-IE browsers. */
+* html .goog-toolbar-menu-button-disabled {
+  /* IE can't apply alpha to an element with a transparent background... */
+  background-color: #f0f0f0;
+  margin: 0 1px;
+  padding: 0 1px;
+}
+
+/* IE7-only hack; ignored by all other browsers. */
+*:first-child+html .goog-toolbar-menu-button-disabled {
+  /* IE can't apply alpha to an element with a transparent background... */
+  background-color: #f0f0f0;
+  margin: 0 1px;
+  padding: 0 1px;
+}
+
+/* Only draw borders when in a non-default state. */
+.goog-toolbar-menu-button-hover .goog-toolbar-menu-button-outer-box,
+.goog-toolbar-menu-button-active .goog-toolbar-menu-button-outer-box,
+.goog-toolbar-menu-button-open .goog-toolbar-menu-button-outer-box {
+  border-width: 1px 0;
+  border-style: solid;
+  padding: 0;
+}
+
+.goog-toolbar-menu-button-hover .goog-toolbar-menu-button-inner-box,
+.goog-toolbar-menu-button-active .goog-toolbar-menu-button-inner-box,
+.goog-toolbar-menu-button-open .goog-toolbar-menu-button-inner-box {
+  border-width: 0 1px;
+  border-style: solid;
+  padding: 3px;
+}
+
+/* Hover styles. */
+.goog-toolbar-menu-button-hover .goog-toolbar-menu-button-outer-box,
+.goog-toolbar-menu-button-hover .goog-toolbar-menu-button-inner-box {
+  /* Hover border color trumps active/open style. */
+  border-color: #a1badf !important;
+}
+
+/* Active/open styles. */
+.goog-toolbar-menu-button-active,
+.goog-toolbar-menu-button-open {
+  /* Active/open background color wins. */
+  background-color: #dde1eb !important;
+}
+
+.goog-toolbar-menu-button-active .goog-toolbar-menu-button-outer-box,
+.goog-toolbar-menu-button-active .goog-toolbar-menu-button-inner-box,
+.goog-toolbar-menu-button-open .goog-toolbar-menu-button-outer-box,
+.goog-toolbar-menu-button-open .goog-toolbar-menu-button-inner-box {
+  border-color: #729bd1;
+}
+
+/* Menu button caption style. */
+.goog-toolbar-menu-button-caption {
+  padding: 0 4px 0 0;
+  vertical-align: middle;
+}
+
+/* Dropdown style. */
+.goog-toolbar-menu-button-dropdown {
+  width: 7px;
+  /* Client apps may override the URL at which they serve the sprite. */
+  background: url(//ssl.gstatic.com/editor/editortoolbar.png) no-repeat -388px 0;
+  vertical-align: middle;
+}
+
+
+/*
+ * Styles used by goog.ui.ToolbarSeparatorRenderer.
+ */
+
+.goog-toolbar-separator {
+  margin: 0 2px;
+  border-left: 1px solid #d6d6d6;
+  border-right: 1px solid #f7f7f7;
+  padding: 0;
+  width: 0;
+  text-decoration: none;
+  list-style: none;
+  outline: none;
+  vertical-align: middle;
+  line-height: normal;
+  font-size: 120%;
+  overflow: hidden;
+}
+
+
+/*
+ * Additional styling for toolbar select controls, which always have borders.
+ */
+
+.goog-toolbar-select .goog-toolbar-menu-button-outer-box {
+  border-width: 1px 0;
+  border-style: solid;
+  padding: 0;
+}
+
+.goog-toolbar-select .goog-toolbar-menu-button-inner-box {
+  border-width: 0 1px;
+  border-style: solid;
+  padding: 3px;
+}
+
+.goog-toolbar-select .goog-toolbar-menu-button-outer-box,
+.goog-toolbar-select .goog-toolbar-menu-button-inner-box {
+  border-color: #bfcbdf;
+}
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Standard styling for buttons created by goog.ui.ColorMenuButtonRenderer.
+ *
+ * @author attila@google.com (Attila Bodis)
+ */
+
+
+/* Color indicator. */
+.goog-color-menu-button-indicator {
+  border-bottom: 4px solid #f0f0f0;
+}
+
+/* Thinner padding for color picker buttons, to leave room for the indicator. */
+.goog-color-menu-button .goog-menu-button-inner-box,
+.goog-toolbar-color-menu-button .goog-toolbar-menu-button-inner-box {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Standard styling for palettes created by goog.ui.PaletteRenderer.
+ *
+ * @author pupius@google.com (Daniel Pupius)
+ * @author attila@google.com (Attila Bodis)
+ */
+
+
+.goog-palette {
+  cursor: default;
+  outline: none;
+}
+
+.goog-palette-table {
+  border: 1px solid #666;
+  border-collapse: collapse;
+  margin: 5px;
+}
+
+.goog-palette-cell {
+  border: 0;
+  border-right: 1px solid #666;
+  cursor: pointer;
+  height: 18px;
+  margin: 0;
+  text-align: center;
+  vertical-align: middle;
+  width: 18px;
+}
+
+/*
+ * Copyright 2009 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Standard styling for color palettes.
+ *
+ * @author pupius@google.com (Daniel Pupius)
+ * @author attila@google.com (Attila Bodis)
+ */
+
+
+.goog-palette-cell .goog-palette-colorswatch {
+  border: none;
+  font-size: x-small;
+  height: 18px;
+  position: relative;
+  width: 18px;
+}
+
+.goog-palette-cell-hover .goog-palette-colorswatch {
+  border: 1px solid #fff;
+  height: 16px;
+  width: 16px;
+}
+
+.goog-palette-cell-selected .goog-palette-colorswatch {
+  /* Client apps may override the URL at which they serve the sprite. */
+  background: url(//ssl.gstatic.com/editor/editortoolbar.png) no-repeat -368px 0;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  height: 16px;
+  width: 16px;
+}
+
+.goog-palette-customcolor {
+  background-color: #fafafa;
+  border: 1px solid #eee;
+  color: #666;
+  font-size: x-small;
+  height: 15px;
+  position: relative;
+  width: 15px;
+}
+
+.goog-palette-cell-hover .goog-palette-customcolor {
+  background-color: #fee;
+  border: 1px solid #f66;
+  color: #f66;
+}
+
+/*
+ * Copyright 2005 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Bubble styles.
+ *
+ * @author robbyw@google.com (Robby Walker)
+ * @author nicksantos@google.com (Nick Santos)
+ * @author jparent@google.com (Julie Parent)
+ */
+
+div.tr_bubble {
+  position: absolute;
+
+  background-color: #e0ecff;
+  border: 1px solid #99c0ff;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  font-size: 83%;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 2px 19px 6px 6px;
+  white-space: nowrap;
+}
+
+.tr_bubble_link {
+  color: #00c;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 100%;
+}
+
+.tr_bubble .tr_option-link,
+.tr_bubble #tr_delete-image,
+.tr_bubble #tr_module-options-link {
+  font-size: 83%;
+}
+
+.tr_bubble_closebox {
+  position: absolute;
+  cursor: default;
+  background: url(//ssl.gstatic.com/editor/bubble_closebox.gif) top left no-repeat;
+  padding: 0;
+  margin: 0;
+  width: 10px;
+  height: 10px;
+  top: 3px;
+  right: 5px;
+}
+
+div.tr_bubble_panel {
+  padding: 2px 0 1px;
+}
+
+div.tr_bubble_panel_title {
+  display: none;
+}
+
+div.tr_multi_bubble div.tr_bubble_panel_title {
+  margin-right: 1px;
+  display: block;
+  float: left;
+  width: 50px;
+}
+
+div.tr_multi_bubble div.tr_bubble_panel {
+  padding: 2px 0 1px;
+  margin-right: 50px;
+}
+
+/*
+ * Copyright 2007 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/*
+ * Styles for Editor dialogs and their sub-components.
+ *
+ * @author marcosalmeida@google.com (Marcos Almeida)
+ */
+
+
+.tr-dialog {
+  width: 475px;
+}
+
+.tr-dialog .goog-tab-content {
+  margin: 0;
+  border: 1px solid #6b90da;
+  padding: 4px 8px;
+  background: #fff;
+  overflow: auto;
+}
+
+.tr-tabpane {
+  font-size: 10pt;
+  padding: 1.3ex 0;
+}
+
+.tr-tabpane-caption {
+  font-size: 10pt;
+  margin-bottom: 0.7ex;
+  background-color: #fffaf5;
+  line-height: 1.3em;
+}
+
+.tr-tabpane .goog-tab-content {
+  border: none;
+  padding: 5px 7px 1px;
+}
+
+.tr-tabpane .goog-tab {
+  background-color: #fff;
+  border: none;
+  width: 136px;
+  line-height: 1.3em;
+  margin-bottom: 0.7ex;
+}
+
+.tr-tabpane .goog-tab {
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
+
+.tr-tabpane .goog-tab-selected {
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+
+.tr-tabpane .goog-tab input {
+  margin: -2px 5px 0 0;
+}
+
+/*
+ * Copyright 2007 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+/**
+ * Styles for the Editor's Edit Link dialog.
+ *
+ * @author marcosalmeida@google.com (Marcos Almeida)
+ */
+
+
+.tr-link-dialog-explanation-text {
+  font-size: 83%;
+  margin-top: 15px;
+}
+
+.tr-link-dialog-target-input {
+  width: 98%; /* 98% prevents scroll bars in standards mode. */
+  /* Input boxes for URLs and email address should always be LTR. */
+  direction: ltr;
+}
+
+.tr-link-dialog-email-warning {
+  text-align: center;
+  color: #c00;
+  font-weight: bold;
+}
+
+.tr_pseudo-link {
+ color: #00c;
+ text-decoration: underline;
+ cursor: pointer;
+}
+
+/*
+ * Copyright 2008 The Closure Library Authors. All Rights Reserved.
+ *
+ * Use of this source code is governed by the Apache License, Version 2.0.
+ * See the COPYING file for details.
+ */
+
+
+/*
+ * Editor toolbar styles.
+ *
+ * @author attila@google.com (Attila Bodis)
+ */
+
+/* Common base style for all icons. */
+.tr-icon {
+  width: 16px;
+  height: 16px;
+  background: url(//ssl.gstatic.com/editor/editortoolbar.png) no-repeat;
+  vertical-align: middle;
+}
+
+.goog-color-menu-button-indicator .tr-icon {
+  height: 14px;
+}
+
+/* Undo (redo when the chrome is right-to-left). */
+.tr-undo,
+.goog-toolbar-button-rtl .tr-redo {
+  background-position: 0;
+}
+
+/* Redo (undo when the chrome is right-to-left). */
+.tr-redo,
+.goog-toolbar-button-rtl .tr-undo {
+  background-position: -16px;
+}
+
+/* Font name. */
+.tr-fontName .goog-toolbar-menu-button-caption {
+  color: #246;
+  width: 16ex;
+  height: 16px;
+  overflow: hidden;
+}
+
+/* Font size. */
+.tr-fontSize .goog-toolbar-menu-button-caption {
+  color: #246;
+  width: 8ex;
+  height: 16px;
+  overflow: hidden;
+}
+
+/* Bold. */
+.tr-bold {
+  background-position: -32px;
+}
+
+/* Italic. */
+.tr-italic {
+  background-position: -48px;
+}
+
+/* Underline. */
+.tr-underline {
+  background-position: -64px;
+}
+
+/* Foreground color. */
+.tr-foreColor {
+  height: 14px;
+  background-position: -80px;
+}
+
+/* Background color. */
+.tr-backColor {
+  height: 14px;
+  background-position: -96px;
+}
+
+/* Link. */
+.tr-link {
+  font-weight: bold;
+  color: #009;
+  text-decoration: underline;
+}
+
+/* Insert image. */
+.tr-image {
+  background-position: -112px;
+}
+
+/* Insert drawing. */
+.tr-newDrawing {
+  background-position: -592px;
+}
+
+/* Insert special character. */
+.tr-spChar {
+  font-weight: bold;
+  color: #900;
+}
+
+/* Increase indent. */
+.tr-indent {
+  background-position: -128px;
+}
+
+/* Increase ident in right-to-left text mode, regardless of chrome direction. */
+.tr-rtl-mode .tr-indent {
+  background-position: -400px;
+}
+
+/* Decrease indent. */
+.tr-outdent {
+  background-position: -144px;
+}
+
+/* Decrease indent in right-to-left text mode, regardless of chrome direction. */
+.tr-rtl-mode .tr-outdent {
+  background-position: -416px;
+}
+
+/* Bullet (unordered) list. */
+.tr-insertUnorderedList {
+  background-position: -160px;
+}
+
+/* Bullet list in right-to-left text mode, regardless of chrome direction. */
+.tr-rtl-mode .tr-insertUnorderedList {
+  background-position: -432px;
+}
+
+/* Number (ordered) list. */
+.tr-insertOrderedList {
+  background-position: -176px;
+}
+
+/* Number list in right-to-left text mode, regardless of chrome direction. */
+.tr-rtl-mode .tr-insertOrderedList {
+  background-position: -448px;
+}
+
+/* Text alignment buttons. */
+.tr-justifyLeft {
+  background-position: -192px;
+}
+.tr-justifyCenter {
+  background-position: -208px;
+}
+.tr-justifyRight {
+  background-position: -224px;
+}
+.tr-justifyFull {
+  background-position: -480px;
+}
+
+/* Blockquote. */
+.tr-BLOCKQUOTE {
+  background-position: -240px;
+}
+
+/* Blockquote in right-to-left text mode, regardless of chrome direction. */
+.tr-rtl-mode .tr-BLOCKQUOTE {
+  background-position: -464px;
+}
+
+/* Remove formatting. */
+.tr-removeFormat {
+  background-position: -256px;
+}
+
+/* Spellcheck. */
+.tr-spell {
+  background-position: -272px;
+}
+
+/* Left-to-right text direction. */
+.tr-ltr {
+  background-position: -288px;
+}
+
+/* Right-to-left text direction. */
+.tr-rtl {
+  background-position: -304px;
+}
+
+/* Insert iGoogle module. */
+.tr-insertModule {
+  background-position: -496px;
+}
+
+/* Strike through text */
+.tr-strikeThrough {
+  background-position: -544px;
+}
+
+/* Subscript */
+.tr-subscript {
+  background-position: -560px;
+}
+
+/* Superscript */
+.tr-superscript {
+  background-position: -576px;
+}
+
+/* Insert drawing. */
+.tr-equation {
+  background-position: -608px;
+}
+
+/* Edit HTML. */
+.tr-editHtml {
+  color: #009;
+}
+
+/* "Format block" menu. */
+.tr-formatBlock .goog-toolbar-menu-button-caption {
+  color: #246;
+  width: 12ex;
+  height: 16px;
+  overflow: hidden;
+}
+
+
+.ax-grid {
+}
+
+.ax-grid-item {
+	width: 90px;
+	height: 90px;
+	border: 3px solid white;
+	display: table-cell;
+	vertical-align: middle;
+	float: left;
+}
+
+.ax-grid .goog-control-active {
+	width: 90px;
+	height: 90px;
+	border: 3px solid red;
+}
+
+.ax-grid-item.goog-control-open {
+	width: 90px;
+	height: 90px;
+	border: 3px solid rgb(255, 163, 0);
+}
+
+.ax-grid-item.goog-control-hover {
+	width: 90px;
+	height: 90px;
+	border: 3px solid rgb(71, 142, 248);
+}
+
+.ax-grid-item .playBtn {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width: 20px;
+	height: 20px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 35px;
+}
+
+.ax-grid-item .playBtn:hover {
+	opacity: 1;
+	-webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(.7, transparent), to(rgba(0, 0, 0, 0.4)));
+	-webkit-box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+	-moz-box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+	box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.ax-grid-item img {
+	height: 90px;
+}
+
+.video {
+	display: table-cell;
+	height: 360px;
+	width: 480px;
+	vertical-align: middle;
+}
+
+.ads {
+	display: block;
+	z-index: 102;
+}
+
+.video .playBtn {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width: 50px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.video .playBtn:hover {
+	opacity: 1;
+	-webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(.7, transparent), to(rgba(0, 0, 0, 0.4)));
+	-webkit-box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+	-moz-box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+	box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.goog-bubble-font {
+	font-size: 14px;
+	color: #888888;
+}
+
+fieldset {
+	display: block;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-before: 0.35em;
+	-webkit-padding-start: 0.75em;
+	-webkit-padding-end: 0.75em;
+	-webkit-padding-after: 0.625em;
+	border: 2px groove threedface;
+	border-image-source: initial;
+	border-image-slice: initial;
+	border-image-width: initial;
+	border-image-outset: initial;
+	border-image-repeat: initial;
+	min-width: -webkit-min-content;
+}
+
+#win1 .bar {
+	background-color: #F99;
+}
+
+.bar {
+	position: relative;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 20px;
+	background-color: #1a75bc;
+	cursor: default;
+}
+
+html , body {
+	height: 100%;
+}
+
+#wrap {
+	min-height: 100%;
+}
+
+#main {
+	overflow: auto;
+	padding-bottom: 150px;
+}
+
+.footer {
+	position: relative;
+	margin-top: -20px;
+	height: 10px;
+	clear: both;
+	padding-top: 20px;
+}
+
+.admin {
+}
+
+.wtContainer {
+	display: block;
+}
+
+.widget {
+	display: block;
+	background-color: rgb(200, 200, 250);
+	border: 1px solid #99F;
+	font: bold 11px / 18px arial;
+	text-indent: 10px;
+	color: #FFF;
+}
+
+.window {
+	background-color: rgb(200, 200, 250);
+	border: 1px solid #99F;
+	font: bold 11px / 18px arial;
+	color: #FFF;
+}
+
+.admin .admBtn {
+	visibility: hidden;
+}
+
+.admin:hover .admBtn {
+	visibility: visible;
+	z-index: 100;
+}
+
+#masterNavBarId .goog-menubar .goog-menu-button {
+	color: #A0A0A0;
+	background: rgba(255, 255, 255, 00);
+	border-color: rgba(255, 255, 255, 00);
+}
+
+#masterNavBarId .goog-menubar .goog-menu-button-hover {
+	color: white;
+	background:rgba(80  , 80 , 80 , 5); border-color:rgba(255  , 255 , 255 , 00);
+}
+
+#masterNavBarId .goog-menu-button-disabled {
+	background-image: none ! important;
+	opacity: 0.3;
+	-moz-opacity: 0.3;
+	filter: alpha(opacity=30);
+}
+
+#masterNavBarId .goog-menu-button-active {
+	background-image: none ! important;
+	opacity: 1;
+	-moz-opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+#masterNavBarId .goog-menubar .goog-menu-button-disabled .goog-menu-button-caption {
+	color: #fff ! important;
+	border-color: #999 ! important;
+}
+
+#masterNavBarId a {
+	font-size: 13px;
+	font-weight: bold;
+	color: #A0A0A0;
+	text-decoration: none;
+}
+
+a {
+	text-decoration: underline;
+}
+
+.navbar {
+	overflow: visible;
+	margin-bottom: 0;
+	*position: relative;
+	*z-index: 2;
+}
+
+.navbar-inner {
+	min-height: 20px;
+}
+
+.navbar .nav > li > a {
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+hr {
+	border-top-color: #dedade;
+	width: 432px;
+}
+
+.glowing-border {
+	border: 1px solid #757F8D;
+	border-radius: 3px;
+}
+
+.glowing-border:focus {
+	outline: none;
+	border-color: #1355B9;
+	box-shadow: 0 0 10px #9ecaed;
+}
+
+.ac-active {
+	background-color: #D7E0F7;
+}
+
+.highlightit img {
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=90);
+-moz-opacity: 0.9; opacity: 0.9;
+}
+
+.highlightit:hover img {
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=130);
+-moz-opacity: 1.3; opacity: 1.3;
+}
+
