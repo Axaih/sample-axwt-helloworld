@@ -1,6 +1,6 @@
-# low documented and incomplete
+low documented and incomplete
 
-#set  CLOSURE_TOOLS and HELLO_HOME environment variable
+set  $CLOSURE_TOOLS and $HELLO_HOME environment variable before setup
 
 
   
